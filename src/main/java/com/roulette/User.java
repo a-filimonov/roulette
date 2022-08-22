@@ -1,8 +1,10 @@
 package com.roulette;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(of = "name")
 public class User {
     private final String name;
     private long balance;

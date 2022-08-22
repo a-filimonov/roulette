@@ -9,6 +9,7 @@ import com.roulette.bet.DozenBet;
 import com.roulette.bet.EvenBet;
 import com.roulette.bet.HalfBet;
 import com.roulette.exception.EndGameException;
+import com.roulette.log.Log;
 import com.roulette.stats.Stats;
 import com.roulette.strategy.DoubleBetColorStrategy;
 import com.roulette.strategy.MartingaleStrategy;
@@ -24,89 +25,91 @@ class RouletteTest {
     private static final long BALANCE = 1000;
     private static final long BET = 15;
     private static final boolean DEBUG = false;
-    private static final int ITERATIONS = 1;
+    private static final int ITERATIONS = 20;
     private static final Stats STATS = new Stats();
 
     @AfterAll
     static void end() {
-        STATS.getAll().forEach((id, stats) ->
-            System.out.printf("Roulette %s: %s. PAYOUT: %.2f%%%n", id, stats, stats.payout())
-        );
+        STATS.getAll().entrySet().forEach(e -> {
+            String name = e.getKey().getName();
+            System.out.printf("Roulette [%s]:\n", name);
+            e.getValue().forEach(stat -> System.out.printf("\t%s. PAYOUT: %.2f%%\n", stat, stat.payout()));
+        });
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_red() {
-        play(roulette("Always RED"), bet -> colorBet(RED));
+        play(roulette("User bets always RED color"), bet -> colorBet(RED));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_black() {
-        play(roulette("Always BLACK"), bet -> colorBet(BLACK));
+        play(roulette("User bets always BLACK color"), bet -> colorBet(BLACK));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_random_color() {
-        play(roulette("Always Random"), bet -> colorBet(random()));
+        play(roulette("User bets random color"), bet -> colorBet(random()));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_even() {
-        play(roulette("Always EVEN"), bet -> evenBet(true));
+        play(roulette("User bets always EVEN"), bet -> evenBet(true));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_odd() {
-        play(roulette("Always ODD"), bet -> evenBet(false));
+        play(roulette("User bets always ODD"), bet -> evenBet(false));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_first_half() {
-        play(roulette("Always FIRST HALF"), bet -> halfBet(true));
+        play(roulette("User bets 1-18"), bet -> halfBet(true));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_second_half() {
-        play(roulette("Always SECOND_HALF"), bet -> halfBet(false));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_double_bet_when_lost_martingale_strategy() {
-        play(roulette("Martingale RED"), new MartingaleStrategy(colorBet(RED)));
+        play(roulette("User bets 19-36"), bet -> halfBet(false));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_first_dozen() {
-        play(roulette("Always FIRST DOZEN"), bet -> dozenBet(DozenBet.Dozen.FIRST));
+        play(roulette("User bets 1-12"), bet -> dozenBet(DozenBet.Dozen.FIRST));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_second_dozen() {
-        play(roulette("Always SECOND DOZEN"), bet -> dozenBet(DozenBet.Dozen.SECOND));
+        play(roulette("User bets 13-24"), bet -> dozenBet(DozenBet.Dozen.SECOND));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_third_dozen() {
-        play(roulette("Always THIRD DOZEN"), bet -> dozenBet(DozenBet.Dozen.THIRD));
+        play(roulette("User bets 25-36"), bet -> dozenBet(DozenBet.Dozen.THIRD));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_first_column() {
-        play(roulette("Always FIRST COLUMN"), bet -> columnBet(ColumnBet.Column.FIRST));
+        play(roulette("User bets FIRST COLUMN"), bet -> columnBet(ColumnBet.Column.FIRST));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_second_column() {
-        play(roulette("Always SECOND COLUMN"), bet -> columnBet(ColumnBet.Column.SECOND));
+        play(roulette("User bets SECOND COLUMN"), bet -> columnBet(ColumnBet.Column.SECOND));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_third_column() {
-        play(roulette("Always THIRD COLUMN"), bet -> columnBet(ColumnBet.Column.THIRD));
+        play(roulette("User bets THIRD COLUMN"), bet -> columnBet(ColumnBet.Column.THIRD));
+    }
+
+    @RepeatedTest(ITERATIONS)
+    void roulette_double_bet_when_lost_martingale_strategy() {
+        play(roulette("User bets by Martingale strategy"), new MartingaleStrategy(colorBet(RED)));
     }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_double_bet() {
-        play(roulette("Double RED"), new DoubleBetColorStrategy(colorBet(RED)));
+        play(roulette("User always doubles the bet"), new DoubleBetColorStrategy(colorBet(RED)));
     }
 
     private static void play(Roulette roulette, Function<Long, Bet> betFunction) {
@@ -121,8 +124,9 @@ class RouletteTest {
     }
 
     private static Roulette roulette(String name) {
-        Roulette roulette = new Roulette(new User(name, BALANCE), DEBUG);
-        STATS.register(roulette);
+        User user = new User(name, BALANCE);
+        Roulette roulette = new Roulette(user, new Log(DEBUG));
+        STATS.register(user, roulette);
         return roulette;
     }
 
@@ -142,7 +146,7 @@ class RouletteTest {
         return new DozenBet(BET, dozen);
     }
 
-    private Bet columnBet(ColumnBet.Column column) {
+    private static Bet columnBet(ColumnBet.Column column) {
         return new ColumnBet(BET, column);
     }
 }

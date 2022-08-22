@@ -1,27 +1,26 @@
 package com.roulette.stats;
 
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import com.roulette.Roulette;
+import com.roulette.User;
+import com.roulette.util.MultiMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 public class Stats {
 
-    private static final Map<String, RouletteStats> ROULETTE_STATS = new HashMap<>();
+    private static final MultiMap<User, RouletteStats> ROULETTE_STATS = new MultiMap<>();
 
-    public RouletteStats get(String id) {
-        return ROULETTE_STATS.get(id);
-    }
-
-    public Map<String, RouletteStats> getAll() {
+    public MultiMap<User, RouletteStats> getAll() {
         return ROULETTE_STATS;
     }
 
-    public void register(Roulette roulette) {
-        ROULETTE_STATS.put(roulette.getId(), roulette.getStats());
+    public void register(User user, Roulette roulette) {
+        ROULETTE_STATS.add(user, roulette.getStats());
     }
 
     @Getter
