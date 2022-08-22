@@ -16,4 +16,9 @@ public class ColorBet extends Bet {
     public ColorBet doubled() {
         return new ColorBet(getBet() * 2, color);
     }
+
+    @Override
+    public String toString() {
+        return color.name();
+    }
 }

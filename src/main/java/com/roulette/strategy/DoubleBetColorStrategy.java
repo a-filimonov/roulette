@@ -2,9 +2,10 @@ package com.roulette.strategy;
 
 import java.util.function.Function;
 
+import com.roulette.bet.Bet;
 import com.roulette.bet.ColorBet;
 
-public class DoubleBetColorStrategy implements Function<Long, ColorBet> {
+public class DoubleBetColorStrategy implements Function<Long, Bet> {
 
     protected ColorBet bet;
 

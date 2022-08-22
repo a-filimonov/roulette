@@ -1,6 +1,6 @@
 package com.roulette;
 
-import com.roulette.bet.ColorBet;
+import com.roulette.bet.Bet;
 
 public class Roulette {
 
@@ -17,22 +17,18 @@ public class Roulette {
         this.engine = new RouletteEngine();
     }
 
-    public Long play(ColorBet bet) {
+    public Long play(Bet bet) {
         Field field = engine.turn();
         debug("Turn %s :: [%s] :: ", engine.getTurns(), field);
 
-        return processBet(new Paytable(field), bet);
-    }
-
-    private Long processBet(Paytable paytable, ColorBet bet) {
         var totalBet = bet.getBet();
         if (!user.isAbleToBet(totalBet)) {
             throw new RuntimeException(String.format("User %s lost all money. Wins: [%s]. Loses: [%s]. Max balance: [%s]", user.getName(), wins, loses, user.getMaxBalance()));
         }
         user.bet(totalBet);
-        debug("User %s bets %s on %s :: ", user.getName(), totalBet, bet.getColor());
+        debug("User %s bets %s on %s :: ", user.getName(), totalBet, bet);
 
-        long win = paytable.process(bet);
+        long win = new Paytable(field).process(bet);
         user.win(win);
         if (win > 0) {
             wins++;

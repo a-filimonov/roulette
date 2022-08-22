@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import static com.roulette.Field.Color.BLACK;
-import static com.roulette.Field.Color.GREEN;
 import static com.roulette.Field.Color.RED;
 
 @NoArgsConstructor
@@ -15,7 +14,7 @@ public class RouletteEngine {
 
     private static final Random RANDOM = new Random();
     private static final List<Field> REEL = List.of(
-        new Field(0, GREEN),
+        Field.ZERO,
         new Field(32, RED),
         new Field(15, BLACK),
         new Field(19, RED),
