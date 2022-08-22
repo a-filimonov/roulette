@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class EvenBet extends Bet {
 
-    boolean even;
+    private final boolean even;
 
     public EvenBet(long bet, boolean even) {
         super(bet);

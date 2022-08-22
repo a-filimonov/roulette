@@ -3,6 +3,7 @@ package com.roulette;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.roulette.bet.DozenBet;
 import lombok.Value;
 
 @Value
@@ -21,8 +22,8 @@ public class Field {
         public static Color random() {
             return Arrays.asList(values()).get(RANDOM.nextInt(2));  // exclude GREEN
         }
-    }
 
+    }
     public boolean isZero() {
         return this.equals(ZERO);
     }
@@ -33,6 +34,19 @@ public class Field {
 
     public boolean isFirstHalf() {
         return number >= 1 && number <= 18;
+    }
+
+    public boolean isDozen(DozenBet.Dozen dozen) {
+        switch (dozen) {
+            case FIRST:
+                return number >= 1 && number <= 12;
+            case SECOND:
+                return number >= 13 && number <= 24;
+            case THIRD:
+                return number >= 25 && number <= 36;
+            default:
+                throw new RuntimeException("Dozen unsupported: " + dozen);
+        }
     }
 
     public String toString() {

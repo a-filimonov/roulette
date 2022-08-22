@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import com.roulette.bet.Bet;
 import com.roulette.bet.ColorBet;
+import com.roulette.bet.DozenBet;
 import com.roulette.bet.EvenBet;
 import com.roulette.bet.HalfBet;
 import com.roulette.strategy.DoubleBetColorStrategy;
@@ -19,7 +20,7 @@ class RouletteTest {
     private static final long BALANCE = 1000;
     private static final long BET = 15;
     private static final boolean DEBUG = false;
-    private static final int ITERATIONS = 10;
+    private static final int ITERATIONS = 100;
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_red() {
@@ -62,6 +63,21 @@ class RouletteTest {
     }
 
     @RepeatedTest(ITERATIONS)
+    void roulette_always_bet_first_dozen() {
+        play(roulette("Always FIRST DOZEN"), bet -> dozenBet(DozenBet.Dozen.FIRST));
+    }
+
+    @RepeatedTest(ITERATIONS)
+    void roulette_always_bet_second_dozen() {
+        play(roulette("Always SECOND DOZEN"), bet -> dozenBet(DozenBet.Dozen.SECOND));
+    }
+
+    @RepeatedTest(ITERATIONS)
+    void roulette_always_bet_third_dozen() {
+        play(roulette("Always THIRD DOZEN"), bet -> dozenBet(DozenBet.Dozen.THIRD));
+    }
+
+    @RepeatedTest(ITERATIONS)
     void roulette_always_double_bet() {
         play(roulette("Double RED"), new DoubleBetColorStrategy(colorBet(RED)));
     }
@@ -91,5 +107,9 @@ class RouletteTest {
 
     private static HalfBet halfBet(boolean firstHalf) {
         return new HalfBet(BET, firstHalf);
+    }
+
+    private static Bet dozenBet(DozenBet.Dozen dozen) {
+        return new DozenBet(BET, dozen);
     }
 }

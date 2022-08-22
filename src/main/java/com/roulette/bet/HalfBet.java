@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class HalfBet extends Bet {
 
-    boolean firstHalf;
+    private final boolean firstHalf;
 
     public HalfBet(long bet, boolean firstHalf) {
         super(bet);
