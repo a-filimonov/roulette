@@ -3,14 +3,12 @@ package com.roulette;
 import java.util.List;
 import java.util.Random;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.roulette.stats.Stats;
 
 import static com.roulette.Field.Color.BLACK;
 import static com.roulette.Field.Color.RED;
 
-@NoArgsConstructor
-public class RouletteEngine {
+public class RouletteWheel {
 
     private static final Random RANDOM = new Random();
     private static final List<Field> REEL = List.of(
@@ -53,11 +51,14 @@ public class RouletteEngine {
         new Field(26, BLACK)
     );
 
-    @Getter
-    private int turns;
+    private final Stats.RouletteStats stats;
+
+    public RouletteWheel(Stats.RouletteStats stats) {
+        this.stats = stats;
+    }
 
     public Field turn() {
-        turns++;
+        stats.addTurn();
         return REEL.get(RANDOM.nextInt(REEL.size()));
     }
 }

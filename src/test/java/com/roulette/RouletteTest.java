@@ -8,8 +8,11 @@ import com.roulette.bet.ColumnBet;
 import com.roulette.bet.DozenBet;
 import com.roulette.bet.EvenBet;
 import com.roulette.bet.HalfBet;
+import com.roulette.exception.EndGameException;
+import com.roulette.stats.Stats;
 import com.roulette.strategy.DoubleBetColorStrategy;
 import com.roulette.strategy.MartingaleStrategy;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.RepeatedTest;
 
 import static com.roulette.Field.Color.BLACK;
@@ -21,7 +24,15 @@ class RouletteTest {
     private static final long BALANCE = 1000;
     private static final long BET = 15;
     private static final boolean DEBUG = false;
-    private static final int ITERATIONS = 100;
+    private static final int ITERATIONS = 1;
+    private static final Stats STATS = new Stats();
+
+    @AfterAll
+    static void end() {
+        STATS.getAll().forEach((id, stats) ->
+            System.out.printf("Roulette %s: %s. PAYOUT: %.2f%%%n", id, stats, stats.payout())
+        );
+    }
 
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_red() {
@@ -104,13 +115,15 @@ class RouletteTest {
             while (true) {
                 win = roulette.play(betFunction.apply(win));
             }
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
+        } catch (EndGameException e) {
+            // stop roulette
         }
     }
 
     private static Roulette roulette(String name) {
-        return new Roulette(new User(name, BALANCE), DEBUG);
+        Roulette roulette = new Roulette(new User(name, BALANCE), DEBUG);
+        STATS.register(roulette);
+        return roulette;
     }
 
     private static ColorBet colorBet(Field.Color color) {

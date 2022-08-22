@@ -6,27 +6,24 @@ import lombok.Getter;
 public class User {
     private final String name;
     private long balance;
-    private long maxBalance;
 
     public User(String name, long balance) {
         this.name = name;
         this.balance = balance;
-        this.maxBalance = balance;
     }
 
     public boolean isAbleToBet(long betAmount) {
         return balance >= betAmount;
     }
 
-    public void bet(long betAmount) {
+    public long bet(long betAmount) {
         balance -= betAmount;
+        return balance;
     }
 
-    public void win(long winAmount) {
+    public long win(long winAmount) {
         balance += winAmount;
-        if (balance > maxBalance) {
-            maxBalance = balance;
-        }
+        return balance;
     }
 
     @Override

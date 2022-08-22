@@ -15,6 +15,7 @@ public class Paytable {
 
     private final Field field;
 
+    //TODO refactor bets
     public long process(Bet bet) {
         if (bet instanceof ColorBet) {
             return process((ColorBet) bet);
