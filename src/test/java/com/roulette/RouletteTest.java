@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import com.roulette.bet.Bet;
 import com.roulette.bet.ColorBet;
+import com.roulette.bet.ColumnBet;
 import com.roulette.bet.DozenBet;
 import com.roulette.bet.EvenBet;
 import com.roulette.bet.HalfBet;
@@ -78,6 +79,21 @@ class RouletteTest {
     }
 
     @RepeatedTest(ITERATIONS)
+    void roulette_always_bet_first_column() {
+        play(roulette("Always FIRST COLUMN"), bet -> columnBet(ColumnBet.Column.FIRST));
+    }
+
+    @RepeatedTest(ITERATIONS)
+    void roulette_always_bet_second_column() {
+        play(roulette("Always SECOND COLUMN"), bet -> columnBet(ColumnBet.Column.SECOND));
+    }
+
+    @RepeatedTest(ITERATIONS)
+    void roulette_always_bet_third_column() {
+        play(roulette("Always THIRD COLUMN"), bet -> columnBet(ColumnBet.Column.THIRD));
+    }
+
+    @RepeatedTest(ITERATIONS)
     void roulette_always_double_bet() {
         play(roulette("Double RED"), new DoubleBetColorStrategy(colorBet(RED)));
     }
@@ -111,5 +127,9 @@ class RouletteTest {
 
     private static Bet dozenBet(DozenBet.Dozen dozen) {
         return new DozenBet(BET, dozen);
+    }
+
+    private Bet columnBet(ColumnBet.Column column) {
+        return new ColumnBet(BET, column);
     }
 }

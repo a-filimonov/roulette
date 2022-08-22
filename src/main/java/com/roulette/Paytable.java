@@ -2,6 +2,7 @@ package com.roulette;
 
 import com.roulette.bet.Bet;
 import com.roulette.bet.ColorBet;
+import com.roulette.bet.ColumnBet;
 import com.roulette.bet.DozenBet;
 import com.roulette.bet.EvenBet;
 import com.roulette.bet.HalfBet;
@@ -27,13 +28,16 @@ public class Paytable {
         if (bet instanceof DozenBet) {
             return process((DozenBet) bet);
         }
+        if (bet instanceof ColumnBet) {
+            return process((ColumnBet) bet);
+        }
 
         throw new RuntimeException("Unsupported bet: " + bet);
     }
 
     private long process(ColorBet bet) {
         if (field.isZero()) {
-            return 0L; // for now ZERO pays 0
+            return NO_WIN; // for now ZERO pays 0
         }
         return bet.getColor().equals(field.getColor()) ?
             payOneToOne(bet) :
@@ -42,7 +46,7 @@ public class Paytable {
 
     private long process(EvenBet bet) {
         if (field.isZero()) {
-            return 0L; // for now ZERO pays 0
+            return NO_WIN; // for now ZERO pays 0
         }
         return (bet.isEven() && field.isEven()) || (!bet.isEven() && !field.isEven()) ?
             payOneToOne(bet) :
@@ -51,7 +55,7 @@ public class Paytable {
 
     private long process(HalfBet bet) {
         if (field.isZero()) {
-            return 0L; // for now ZERO pays 0
+            return NO_WIN; // for now ZERO pays 0
         }
         return (bet.isFirstHalf() && field.isFirstHalf()) || (!bet.isFirstHalf() && !field.isFirstHalf()) ?
             payOneToOne(bet) :
@@ -60,9 +64,16 @@ public class Paytable {
 
     private long process(DozenBet bet) {
         if (field.isZero()) {
-            return 0L; // for now ZERO pays 0
+            return NO_WIN; // for now ZERO pays 0
         }
         return field.isDozen(bet.getDozen()) ? payTwoToOne(bet) : NO_WIN;
+    }
+
+    private long process(ColumnBet bet) {
+        if (field.isZero()) {
+            return NO_WIN; // for now ZERO pays 0
+        }
+        return field.isInColumn(bet.getColumn()) ? payTwoToOne(bet) : NO_WIN;
     }
 
     private static long payOneToOne(Bet bet) {
