@@ -1,6 +1,7 @@
 package com.roulette;
 
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 import com.roulette.bet.Bet;
 import com.roulette.bet.inside.SingleBet;
@@ -18,6 +19,9 @@ import com.roulette.strategy.DoubleBetColorStrategy;
 import com.roulette.strategy.MartingaleStrategy;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static com.roulette.core.Field.Color.BLACK;
 import static com.roulette.core.Field.Color.RED;
@@ -42,69 +46,12 @@ class RouletteTest {
         });
     }
 
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_red() {
-        play(roulette("User bets always RED color"), colorBet(RED));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_black() {
-        play(roulette("User bets always BLACK color"), colorBet(BLACK));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_random_color() {
-        play(roulette("User bets random color"), colorBet(random()));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_even() {
-        play(roulette("User bets always EVEN"), evenBet(true));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_odd() {
-        play(roulette("User bets always ODD"), evenBet(false));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_first_half() {
-        play(roulette("User bets 1-18"), halfBet(true));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_second_half() {
-        play(roulette("User bets 19-36"), halfBet(false));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_first_dozen() {
-        play(roulette("User bets 1-12"), dozenBet(DozenBet.Dozen.FIRST));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_second_dozen() {
-        play(roulette("User bets 13-24"), dozenBet(DozenBet.Dozen.SECOND));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_third_dozen() {
-        play(roulette("User bets 25-36"), dozenBet(DozenBet.Dozen.THIRD));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_first_column() {
-        play(roulette("User bets FIRST COLUMN"), columnBet(ColumnBet.Column.FIRST));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_second_column() {
-        play(roulette("User bets SECOND COLUMN"), columnBet(ColumnBet.Column.SECOND));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_third_column() {
-        play(roulette("User bets THIRD COLUMN"), columnBet(ColumnBet.Column.THIRD));
+    @ParameterizedTest
+    @MethodSource(value = "betTestCases")
+    void shouldPlayRouletteWithGivenBet(String strategyName, Bet bet) {
+        for (int i = 0; i < ITERATIONS; i++) {
+            play(roulette(strategyName), bet);
+        }
     }
 
     @RepeatedTest(ITERATIONS)
@@ -117,14 +64,24 @@ class RouletteTest {
         play(roulette("User always doubles the bet"), new DoubleBetColorStrategy(colorBet(RED)));
     }
 
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_zero() {
-        play(roulette("User always bets ZERO"), singleBet(ZERO));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_bet_17() {
-        play(roulette("User always bets 17 BLACK"), singleBet(BLACK_17));
+    private static Stream<Arguments> betTestCases() {
+        return Stream.of(
+            Arguments.of("User bets always RED color", colorBet(RED)),
+            Arguments.of("User bets always BLACK color", colorBet(BLACK)),
+            Arguments.of("User bets random color", colorBet(random())),
+            Arguments.of("User bets always EVEN", evenBet(true)),
+            Arguments.of("User bets always ODD", evenBet(false)),
+            Arguments.of("User bets 1-18", halfBet(true)),
+            Arguments.of("User bets 19-36", halfBet(false)),
+            Arguments.of("User bets 1-12", dozenBet(DozenBet.Dozen.FIRST)),
+            Arguments.of("User bets 13-24", dozenBet(DozenBet.Dozen.SECOND)),
+            Arguments.of("User bets 25-36", dozenBet(DozenBet.Dozen.THIRD)),
+            Arguments.of("User bets FIRST COLUMN", columnBet(ColumnBet.Column.FIRST)),
+            Arguments.of("User bets SECOND COLUMN", columnBet(ColumnBet.Column.SECOND)),
+            Arguments.of("User bets THIRD COLUMN", columnBet(ColumnBet.Column.THIRD)),
+            Arguments.of("User always bets ZERO", singleBet(ZERO)),
+            Arguments.of("User always bets 17 BLACK", singleBet(BLACK_17))
+        );
     }
 
     private static void play(Roulette roulette, Bet bet) {
@@ -175,7 +132,7 @@ class RouletteTest {
         return new ColumnBet(BET, column);
     }
 
-    private Bet singleBet(Field field) {
+    private static Bet singleBet(Field field) {
         return new SingleBet(BET, field);
     }
 }
