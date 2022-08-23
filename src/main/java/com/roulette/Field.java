@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Set;
 
-import com.roulette.bet.ColumnBet;
-import com.roulette.bet.DozenBet;
+import com.roulette.bet.outisde.ColumnBet;
+import com.roulette.bet.outisde.DozenBet;
 import lombok.Value;
 
 @Value
@@ -24,9 +24,8 @@ public class Field {
         public static Color random() {
             return Arrays.asList(values()).get(RANDOM.nextInt(2));  // exclude GREEN
         }
-
-
     }
+
     public boolean isZero() {
         return this.equals(ZERO);
     }

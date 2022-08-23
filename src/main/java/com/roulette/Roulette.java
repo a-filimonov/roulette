@@ -28,7 +28,7 @@ public class Roulette {
 
     public Long play(Bet bet) {
         Field field = wheel.turn();
-        log.debug("Turn %s :: [%s] :: ", stats.getTurns(), field);
+        log.debug("%s :: [%s] :: ", stats.getTurns(), field);
 
         var totalBet = bet.getBet();
         if (!user.isAbleToBet(totalBet)) {
@@ -36,7 +36,7 @@ public class Roulette {
         }
         user.bet(totalBet);
         stats.addBet(totalBet);
-        log.debug("User %s bets %s on %s :: ", user.getName(), totalBet, bet);
+        log.debug("[%s] bets %s on %s :: ", user.getName(), totalBet, bet);
 
         long win = new Paytable(field).process(bet);
 
@@ -44,10 +44,10 @@ public class Roulette {
             long balance = user.win(win);
             stats.addWin(win);
             stats.updateMaxBalance(balance);
-            log.debug("User won %s. ", win);
+            log.debug("Won %s. ", win);
         } else {
             stats.lost();
-            log.debug("User lost %s. ", totalBet);
+            log.debug("Lost %s. ", totalBet);
         }
 
         log.debugln("Balance: %s", user.getBalance());

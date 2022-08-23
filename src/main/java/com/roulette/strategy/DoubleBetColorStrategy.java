@@ -3,7 +3,7 @@ package com.roulette.strategy;
 import java.util.function.Function;
 
 import com.roulette.bet.Bet;
-import com.roulette.bet.ColorBet;
+import com.roulette.bet.outisde.ColorBet;
 
 public class DoubleBetColorStrategy implements Function<Long, Bet> {
 

@@ -1,5 +1,6 @@
-package com.roulette.bet;
+package com.roulette.bet.outisde;
 
+import com.roulette.bet.Bet;
 import lombok.Getter;
 
 @Getter

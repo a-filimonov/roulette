@@ -1,6 +1,6 @@
 package com.roulette.strategy;
 
-import com.roulette.bet.ColorBet;
+import com.roulette.bet.outisde.ColorBet;
 
 public class MartingaleStrategy extends DoubleBetColorStrategy {
 

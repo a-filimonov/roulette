@@ -1,11 +1,12 @@
 package com.roulette;
 
 import com.roulette.bet.Bet;
-import com.roulette.bet.ColorBet;
-import com.roulette.bet.ColumnBet;
-import com.roulette.bet.DozenBet;
-import com.roulette.bet.EvenBet;
-import com.roulette.bet.HalfBet;
+import com.roulette.bet.inside.SingleBet;
+import com.roulette.bet.outisde.ColorBet;
+import com.roulette.bet.outisde.ColumnBet;
+import com.roulette.bet.outisde.DozenBet;
+import com.roulette.bet.outisde.EvenBet;
+import com.roulette.bet.outisde.HalfBet;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class Paytable {
 
     //TODO refactor bets
     public long process(Bet bet) {
+        // outside
         if (bet instanceof ColorBet) {
             return process((ColorBet) bet);
         }
@@ -31,6 +33,11 @@ public class Paytable {
         }
         if (bet instanceof ColumnBet) {
             return process((ColumnBet) bet);
+        }
+
+        // inside
+        if (bet instanceof SingleBet) {
+            return process((SingleBet) bet);
         }
 
         throw new RuntimeException("Unsupported bet: " + bet);
@@ -75,6 +82,10 @@ public class Paytable {
             return NO_WIN; // for now ZERO pays 0
         }
         return field.isInColumn(bet.getColumn()) ? payTwoToOne(bet) : NO_WIN;
+    }
+
+    private long process(SingleBet bet) {
+        return field.equals(bet.getField()) ? bet.getBet() * 37 : NO_WIN;
     }
 
     private static long payOneToOne(Bet bet) {
