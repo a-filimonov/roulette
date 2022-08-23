@@ -9,6 +9,8 @@ import com.roulette.bet.outisde.ColumnBet;
 import com.roulette.bet.outisde.DozenBet;
 import com.roulette.bet.outisde.EvenBet;
 import com.roulette.bet.outisde.HalfBet;
+import com.roulette.core.Field;
+import com.roulette.core.User;
 import com.roulette.exception.EndGameException;
 import com.roulette.log.Log;
 import com.roulette.stats.Stats;
@@ -17,10 +19,11 @@ import com.roulette.strategy.MartingaleStrategy;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.RepeatedTest;
 
-import static com.roulette.Field.Color.BLACK;
-import static com.roulette.Field.Color.RED;
-import static com.roulette.Field.Color.random;
-import static com.roulette.Field.ZERO;
+import static com.roulette.core.Field.Color.BLACK;
+import static com.roulette.core.Field.Color.RED;
+import static com.roulette.core.Field.Color.random;
+import static com.roulette.core.FieldRegistry.BLACK_17;
+import static com.roulette.core.FieldRegistry.ZERO;
 
 class RouletteTest {
 
@@ -117,6 +120,11 @@ class RouletteTest {
     @RepeatedTest(ITERATIONS)
     void roulette_always_bet_zero() {
         play(roulette("User always bets ZERO"), singleBet(ZERO));
+    }
+
+    @RepeatedTest(ITERATIONS)
+    void roulette_always_bet_17() {
+        play(roulette("User always bets 17 BLACK"), singleBet(BLACK_17));
     }
 
     private static void play(Roulette roulette, Bet bet) {

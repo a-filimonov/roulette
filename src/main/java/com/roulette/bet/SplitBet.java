@@ -1,6 +1,6 @@
 package com.roulette.bet;
 
-import com.roulette.Field;
+import com.roulette.core.Field;
 import lombok.Getter;
 
 @Getter

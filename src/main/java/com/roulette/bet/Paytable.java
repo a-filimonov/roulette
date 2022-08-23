@@ -1,4 +1,4 @@
-package com.roulette;
+package com.roulette.bet;
 
 import com.roulette.bet.Bet;
 import com.roulette.bet.inside.SingleBet;
@@ -7,6 +7,7 @@ import com.roulette.bet.outisde.ColumnBet;
 import com.roulette.bet.outisde.DozenBet;
 import com.roulette.bet.outisde.EvenBet;
 import com.roulette.bet.outisde.HalfBet;
+import com.roulette.core.Field;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

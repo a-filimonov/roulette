@@ -3,6 +3,7 @@ package com.roulette;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.roulette.core.Field;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

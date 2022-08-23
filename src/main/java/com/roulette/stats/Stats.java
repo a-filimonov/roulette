@@ -1,11 +1,7 @@
 package com.roulette.stats;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-
 import com.roulette.Roulette;
-import com.roulette.User;
+import com.roulette.core.User;
 import com.roulette.util.MultiMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

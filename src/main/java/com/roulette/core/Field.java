@@ -1,4 +1,4 @@
-package com.roulette;
+package com.roulette.core;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -8,10 +8,10 @@ import com.roulette.bet.outisde.ColumnBet;
 import com.roulette.bet.outisde.DozenBet;
 import lombok.Value;
 
+import static com.roulette.core.FieldRegistry.ZERO;
+
 @Value
 public class Field {
-
-    public static final Field ZERO = new Field(0, Color.GREEN);
 
     int number;
     Color color;

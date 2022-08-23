@@ -1,6 +1,6 @@
 package com.roulette.bet.outisde;
 
-import com.roulette.Field;
+import com.roulette.core.Field;
 import com.roulette.bet.Bet;
 import lombok.Getter;
 
