@@ -16,7 +16,7 @@ public class Field {
     Column column;
 
     public enum Color {
-        RED, BLACK, GREEN;
+        RED, BLK, GRN;
 
         private static final Random RANDOM = new Random();
 
@@ -58,6 +58,6 @@ public class Field {
     }
 
     public String toString() {
-        return String.format("%s %s", number, color);
+        return String.format("%02d %s", number, color);
     }
 }

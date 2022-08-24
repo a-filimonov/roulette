@@ -19,7 +19,7 @@ class FieldTest {
             colors.add(Field.Color.random());
         }
 
-        assertTrue(colors.containsAll(List.of(Field.Color.RED, Field.Color.BLACK)));
-        assertFalse(colors.contains(Field.Color.GREEN));
+        assertTrue(colors.containsAll(List.of(Field.Color.RED, Field.Color.BLK)));
+        assertFalse(colors.contains(Field.Color.GRN));
     }
 }

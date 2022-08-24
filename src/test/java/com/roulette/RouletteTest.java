@@ -1,5 +1,6 @@
 package com.roulette;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import com.roulette.core.bet.Bet;
@@ -10,13 +11,6 @@ import com.roulette.core.bet.outisde.ColumnBet;
 import com.roulette.core.bet.outisde.DozenBet;
 import com.roulette.core.bet.outisde.EvenBet;
 import com.roulette.core.bet.outisde.HalfBet;
-import com.roulette.core.field.Field;
-import com.roulette.core.field.Field.Color;
-import com.roulette.core.field.Split;
-import com.roulette.core.user.User;
-import com.roulette.exception.EndGameException;
-import com.roulette.log.Log;
-import com.roulette.stats.Stats;
 import com.roulette.core.bet.strategy.BetStrategy;
 import com.roulette.core.bet.strategy.DoubleBetColorStrategy;
 import com.roulette.core.bet.strategy.MartingaleStrategy;
@@ -27,12 +21,19 @@ import com.roulette.core.bet.strategy.RandomField;
 import com.roulette.core.bet.strategy.RandomHalf;
 import com.roulette.core.bet.strategy.RandomOddEven;
 import com.roulette.core.bet.strategy.RandomSplit;
+import com.roulette.core.field.Field;
+import com.roulette.core.field.Field.Color;
+import com.roulette.core.field.Split;
+import com.roulette.core.user.User;
+import com.roulette.exception.EndGameException;
+import com.roulette.log.Log;
+import com.roulette.stats.Stats;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static com.roulette.core.field.Field.Color.BLACK;
+import static com.roulette.core.field.Field.Color.BLK;
 import static com.roulette.core.field.Field.Color.RED;
 import static com.roulette.core.field.FieldRegistry.F_17;
 import static com.roulette.core.field.FieldRegistry.ZERO;
@@ -74,7 +75,7 @@ class RouletteTest {
     private static Stream<Arguments> betTestCases() {
         return Stream.of(
             Arguments.of(colorBet(RED)),
-            Arguments.of(colorBet(BLACK)),
+            Arguments.of(colorBet(BLK)),
             Arguments.of(evenBet(true)),
             Arguments.of(evenBet(false)),
             Arguments.of(halfBet(true)),
@@ -108,7 +109,7 @@ class RouletteTest {
     private static void play(Roulette roulette, Bet bet) {
         try {
             while (true) {
-                roulette.play(bet);
+                roulette.play(List.of(bet));
             }
         } catch (EndGameException e) {
             // stop roulette

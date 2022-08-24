@@ -1,5 +1,7 @@
 package com.roulette;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 import com.roulette.core.bet.Bet;
@@ -29,25 +31,25 @@ public class Roulette {
         this.wheel = new RouletteWheel(stats);
     }
 
-    public Long play(Bet bet) {
+    public long play(List<Bet> bets) {
         Field field = wheel.turn();
-        log.debug("%s :: [%s] :: ", stats.getTurns(), field);
+        log.debug("%s :: ", stats.getTurns());
+        var totalBet = bets.stream().mapToLong(Bet::getBet).sum();
 
-        var totalBet = bet.getBet();
         if (!user.isAbleToBet(totalBet)) {
             throw new EndGameException(user);
         }
         user.bet(totalBet);
         stats.addBet(totalBet);
-        log.debug("[%s] bets %s on %s :: ", user.getName(), totalBet, bet);
+        bets.forEach(bet -> log.debug("[%s] bets %s on %s :: [%s] :: ", user.getName(), totalBet, bet, field));
 
-        long win = bet.pay(field);
+        long totalWin = bets.stream().mapToLong(bet -> bet.pay(field)).sum();
 
-        if (win > 0) {
-            long balance = user.win(win);
-            stats.addWin(win);
+        if (totalWin > 0) {
+            long balance = user.win(totalWin);
+            stats.addWin(totalWin);
             stats.updateMaxBalance(balance);
-            log.debug("Won %s. ", win);
+            log.debug("WON %s !!! ", totalWin);
         } else {
             stats.lost();
             log.debug("Lost %s. ", totalBet);
@@ -55,6 +57,10 @@ public class Roulette {
 
         log.debugln("Balance: %s", user.getBalance());
 
-        return win;
+        return totalWin;
+    }
+
+    public Long play(Bet... bets) {
+        return play(Arrays.asList(bets));
     }
 }

@@ -14,4 +14,9 @@ public abstract class NoWinBetStrategy implements BetStrategy {
     }
 
     public abstract Bet apply();
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

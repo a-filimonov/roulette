@@ -26,4 +26,9 @@ public class MartingaleStrategy extends DoubleBetColorStrategy {
     public String getName() {
         return "Martingale strategy";
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
