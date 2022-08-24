@@ -1,7 +1,7 @@
 package com.roulette.stats;
 
 import com.roulette.Roulette;
-import com.roulette.core.User;
+import com.roulette.core.user.User;
 import com.roulette.util.MultiMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

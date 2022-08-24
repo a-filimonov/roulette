@@ -2,41 +2,41 @@ package com.roulette;
 
 import java.util.stream.Stream;
 
-import com.roulette.bet.Bet;
-import com.roulette.bet.inside.SingleBet;
-import com.roulette.bet.inside.SplitBet;
-import com.roulette.bet.outisde.ColorBet;
-import com.roulette.bet.outisde.ColumnBet;
-import com.roulette.bet.outisde.DozenBet;
-import com.roulette.bet.outisde.EvenBet;
-import com.roulette.bet.outisde.HalfBet;
-import com.roulette.core.Field;
-import com.roulette.core.Field.Color;
-import com.roulette.core.Split;
-import com.roulette.core.User;
+import com.roulette.core.bet.Bet;
+import com.roulette.core.bet.inside.SingleBet;
+import com.roulette.core.bet.inside.SplitBet;
+import com.roulette.core.bet.outisde.ColorBet;
+import com.roulette.core.bet.outisde.ColumnBet;
+import com.roulette.core.bet.outisde.DozenBet;
+import com.roulette.core.bet.outisde.EvenBet;
+import com.roulette.core.bet.outisde.HalfBet;
+import com.roulette.core.field.Field;
+import com.roulette.core.field.Field.Color;
+import com.roulette.core.field.Split;
+import com.roulette.core.user.User;
 import com.roulette.exception.EndGameException;
 import com.roulette.log.Log;
 import com.roulette.stats.Stats;
-import com.roulette.strategy.BetStrategy;
-import com.roulette.strategy.DoubleBetColorStrategy;
-import com.roulette.strategy.MartingaleStrategy;
-import com.roulette.strategy.RandomColor;
-import com.roulette.strategy.RandomColumn;
-import com.roulette.strategy.RandomDozen;
-import com.roulette.strategy.RandomField;
-import com.roulette.strategy.RandomHalf;
-import com.roulette.strategy.RandomOddEven;
-import com.roulette.strategy.RandomSplit;
+import com.roulette.core.bet.strategy.BetStrategy;
+import com.roulette.core.bet.strategy.DoubleBetColorStrategy;
+import com.roulette.core.bet.strategy.MartingaleStrategy;
+import com.roulette.core.bet.strategy.RandomColor;
+import com.roulette.core.bet.strategy.RandomColumn;
+import com.roulette.core.bet.strategy.RandomDozen;
+import com.roulette.core.bet.strategy.RandomField;
+import com.roulette.core.bet.strategy.RandomHalf;
+import com.roulette.core.bet.strategy.RandomOddEven;
+import com.roulette.core.bet.strategy.RandomSplit;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static com.roulette.core.Field.Color.BLACK;
-import static com.roulette.core.Field.Color.RED;
-import static com.roulette.core.FieldRegistry.F_17;
-import static com.roulette.core.FieldRegistry.ZERO;
-import static com.roulette.core.SplitRegistry.S_1_2;
+import static com.roulette.core.field.Field.Color.BLACK;
+import static com.roulette.core.field.Field.Color.RED;
+import static com.roulette.core.field.FieldRegistry.F_17;
+import static com.roulette.core.field.FieldRegistry.ZERO;
+import static com.roulette.core.field.SplitRegistry.S_1_2;
 
 class RouletteTest {
 

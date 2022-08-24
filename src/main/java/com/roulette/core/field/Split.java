@@ -1,4 +1,4 @@
-package com.roulette.core;
+package com.roulette.core.field;
 
 import lombok.Value;
 

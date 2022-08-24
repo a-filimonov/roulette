@@ -1,6 +1,6 @@
 package com.roulette.exception;
 
-import com.roulette.core.User;
+import com.roulette.core.user.User;
 import lombok.Getter;
 
 @Getter

@@ -3,9 +3,10 @@ package com.roulette.core;
 import java.util.List;
 import java.util.Random;
 
+import com.roulette.core.field.Field;
 import com.roulette.stats.Stats;
 
-import static com.roulette.core.FieldRegistry.*;
+import static com.roulette.core.field.FieldRegistry.*;
 
 public class RouletteWheel {
 

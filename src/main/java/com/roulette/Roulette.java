@@ -2,10 +2,10 @@ package com.roulette;
 
 import java.util.UUID;
 
-import com.roulette.bet.Bet;
-import com.roulette.core.Field;
+import com.roulette.core.bet.Bet;
+import com.roulette.core.field.Field;
 import com.roulette.core.RouletteWheel;
-import com.roulette.core.User;
+import com.roulette.core.user.User;
 import com.roulette.exception.EndGameException;
 import com.roulette.log.Log;
 import com.roulette.stats.Stats;

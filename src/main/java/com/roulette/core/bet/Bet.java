@@ -1,6 +1,6 @@
-package com.roulette.bet;
+package com.roulette.core.bet;
 
-import com.roulette.core.Field;
+import com.roulette.core.field.Field;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

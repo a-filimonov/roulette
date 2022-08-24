@@ -1,8 +1,8 @@
-package com.roulette.strategy;
+package com.roulette.core.bet.strategy;
 
-import com.roulette.bet.Bet;
-import com.roulette.bet.inside.SplitBet;
-import com.roulette.core.SplitRegistry;
+import com.roulette.core.bet.Bet;
+import com.roulette.core.bet.inside.SplitBet;
+import com.roulette.core.field.SplitRegistry;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

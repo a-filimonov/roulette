@@ -1,7 +1,7 @@
-package com.roulette.bet.outisde;
+package com.roulette.core.bet.outisde;
 
-import com.roulette.bet.Bet;
-import com.roulette.core.Field;
+import com.roulette.core.bet.Bet;
+import com.roulette.core.field.Field;
 import lombok.Getter;
 
 @Getter

@@ -1,4 +1,4 @@
-package com.roulette.core;
+package com.roulette.core.user;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

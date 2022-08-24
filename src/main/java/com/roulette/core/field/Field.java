@@ -1,11 +1,11 @@
-package com.roulette.core;
+package com.roulette.core.field;
 
 import java.util.Arrays;
 import java.util.Random;
 
 import lombok.Value;
 
-import static com.roulette.core.FieldRegistry.ZERO;
+import static com.roulette.core.field.FieldRegistry.ZERO;
 
 @Value
 public class Field {

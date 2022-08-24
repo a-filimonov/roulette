@@ -1,8 +1,8 @@
-package com.roulette.bet.inside;
+package com.roulette.core.bet.inside;
 
-import com.roulette.bet.Bet;
-import com.roulette.core.Field;
-import com.roulette.core.Split;
+import com.roulette.core.bet.Bet;
+import com.roulette.core.field.Field;
+import com.roulette.core.field.Split;
 
 public class SplitBet extends Bet {
 

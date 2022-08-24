@@ -1,7 +1,7 @@
-package com.roulette.strategy;
+package com.roulette.core.bet.strategy;
 
-import com.roulette.bet.Bet;
-import com.roulette.bet.outisde.EvenBet;
+import com.roulette.core.bet.Bet;
+import com.roulette.core.bet.outisde.EvenBet;
 import com.roulette.util.BooleanUtil;
 import lombok.AllArgsConstructor;
 

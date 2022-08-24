@@ -1,14 +1,14 @@
-package com.roulette.core;
+package com.roulette.core.field;
 
 import java.util.List;
 import java.util.Random;
 
-import com.roulette.core.Field.Column;
-import com.roulette.core.Field.Dozen;
+import com.roulette.core.field.Field.Column;
+import com.roulette.core.field.Field.Dozen;
 
-import static com.roulette.core.Field.Color.BLACK;
-import static com.roulette.core.Field.Color.GREEN;
-import static com.roulette.core.Field.Color.RED;
+import static com.roulette.core.field.Field.Color.BLACK;
+import static com.roulette.core.field.Field.Color.GREEN;
+import static com.roulette.core.field.Field.Color.RED;
 
 public class FieldRegistry {
     public static final Field ZERO = new Field(0, GREEN, null, null);

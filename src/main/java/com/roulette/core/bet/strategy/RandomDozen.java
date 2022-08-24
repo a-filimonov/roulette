@@ -1,8 +1,8 @@
-package com.roulette.strategy;
+package com.roulette.core.bet.strategy;
 
-import com.roulette.bet.Bet;
-import com.roulette.bet.outisde.DozenBet;
-import com.roulette.core.Field;
+import com.roulette.core.bet.Bet;
+import com.roulette.core.bet.outisde.DozenBet;
+import com.roulette.core.field.Field;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
