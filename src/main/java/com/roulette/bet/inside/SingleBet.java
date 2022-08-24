@@ -21,7 +21,7 @@ public class SingleBet extends Bet {
 
     @Override
     protected int multiplier() {
-        return 37;
+        return 36;
     }
 
     @Override

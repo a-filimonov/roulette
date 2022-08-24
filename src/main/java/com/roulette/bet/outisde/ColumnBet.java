@@ -7,15 +7,11 @@ import lombok.Getter;
 @Getter
 public class ColumnBet extends Bet {
 
-    private final Column column;
+    private final Field.Column column;
 
-    public ColumnBet(long bet, Column column) {
+    public ColumnBet(long bet, Field.Column column) {
         super(bet);
         this.column = column;
-    }
-
-    public enum Column {
-        FIRST, SECOND, THIRD
     }
 
     @Override
@@ -23,7 +19,7 @@ public class ColumnBet extends Bet {
         if (field.isZero()) {
             return false;
         }
-        return field.isInColumn(column);
+        return field.getColumn() == column;
     }
 
     @Override
@@ -34,9 +30,9 @@ public class ColumnBet extends Bet {
     @Override
     public String toString() {
         switch (column) {
-            case FIRST:
+            case C1:
                 return "1-34";
-            case SECOND:
+            case C2:
                 return "2-35";
             default:
                 return "3-36";

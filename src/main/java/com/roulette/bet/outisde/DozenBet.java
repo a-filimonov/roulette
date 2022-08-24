@@ -7,15 +7,11 @@ import lombok.Getter;
 @Getter
 public class DozenBet extends Bet {
 
-    private final Dozen dozen;
+    private final Field.Dozen dozen;
 
-    public DozenBet(long bet, Dozen dozen) {
+    public DozenBet(long bet, Field.Dozen dozen) {
         super(bet);
         this.dozen = dozen;
-    }
-
-    public enum Dozen {
-        FIRST, SECOND, THIRD;
     }
 
     @Override
@@ -23,7 +19,7 @@ public class DozenBet extends Bet {
         if (field.isZero()) {
             return false;
         }
-        return field.isDozen(dozen);
+        return field.getDozen() == dozen;
     }
 
     @Override
@@ -34,9 +30,9 @@ public class DozenBet extends Bet {
     @Override
     public String toString() {
         switch (dozen) {
-            case FIRST:
+            case D1:
                 return "1-12";
-            case SECOND:
+            case D2:
                 return "13-24";
             default:
                 return "25-36";

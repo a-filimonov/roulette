@@ -73,12 +73,12 @@ class RouletteTest {
             Arguments.of("User bets always ODD", evenBet(false)),
             Arguments.of("User bets 1-18", halfBet(true)),
             Arguments.of("User bets 19-36", halfBet(false)),
-            Arguments.of("User bets 1-12", dozenBet(DozenBet.Dozen.FIRST)),
-            Arguments.of("User bets 13-24", dozenBet(DozenBet.Dozen.SECOND)),
-            Arguments.of("User bets 25-36", dozenBet(DozenBet.Dozen.THIRD)),
-            Arguments.of("User bets FIRST COLUMN", columnBet(ColumnBet.Column.FIRST)),
-            Arguments.of("User bets SECOND COLUMN", columnBet(ColumnBet.Column.SECOND)),
-            Arguments.of("User bets THIRD COLUMN", columnBet(ColumnBet.Column.THIRD)),
+            Arguments.of("User bets 1-12", dozenBet(Field.Dozen.D1)),
+            Arguments.of("User bets 13-24", dozenBet(Field.Dozen.D2)),
+            Arguments.of("User bets 25-36", dozenBet(Field.Dozen.D3)),
+            Arguments.of("User bets FIRST COLUMN", columnBet(Field.Column.C1)),
+            Arguments.of("User bets SECOND COLUMN", columnBet(Field.Column.C2)),
+            Arguments.of("User bets THIRD COLUMN", columnBet(Field.Column.C3)),
             Arguments.of("User always bets ZERO", singleBet(ZERO)),
             Arguments.of("User always bets 17 BLACK", singleBet(BLACK_17))
         );
@@ -124,11 +124,11 @@ class RouletteTest {
         return new HalfBet(BET, firstHalf);
     }
 
-    private static Bet dozenBet(DozenBet.Dozen dozen) {
+    private static Bet dozenBet(Field.Dozen dozen) {
         return new DozenBet(BET, dozen);
     }
 
-    private static Bet columnBet(ColumnBet.Column column) {
+    private static Bet columnBet(Field.Column column) {
         return new ColumnBet(BET, column);
     }
 
