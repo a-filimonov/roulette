@@ -19,6 +19,16 @@ public class ColorBet extends Bet {
     }
 
     @Override
+    protected boolean winCondition(Field field) {
+        return this.color.equals(field.getColor());
+    }
+
+    @Override
+    protected int multiplier() {
+        return 2;
+    }
+
+    @Override
     public String toString() {
         return color.name();
     }

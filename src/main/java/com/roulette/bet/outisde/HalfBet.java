@@ -1,6 +1,7 @@
 package com.roulette.bet.outisde;
 
 import com.roulette.bet.Bet;
+import com.roulette.core.Field;
 import lombok.Getter;
 
 @Getter
@@ -11,6 +12,19 @@ public class HalfBet extends Bet {
     public HalfBet(long bet, boolean firstHalf) {
         super(bet);
         this.firstHalf = firstHalf;
+    }
+
+    @Override
+    protected boolean winCondition(Field field) {
+        if (field.isZero()) {
+            return false;
+        }
+        return this.firstHalf && field.isFirstHalf() || !this.firstHalf && !field.isFirstHalf();
+    }
+
+    @Override
+    protected int multiplier() {
+        return 2;
     }
 
     @Override

@@ -4,7 +4,6 @@ import java.util.UUID;
 
 import com.roulette.bet.Bet;
 import com.roulette.core.Field;
-import com.roulette.bet.Paytable;
 import com.roulette.core.RouletteWheel;
 import com.roulette.core.User;
 import com.roulette.exception.EndGameException;
@@ -42,7 +41,7 @@ public class Roulette {
         stats.addBet(totalBet);
         log.debug("[%s] bets %s on %s :: ", user.getName(), totalBet, bet);
 
-        long win = new Paytable(field).process(bet);
+        long win = bet.pay(field);
 
         if (win > 0) {
             long balance = user.win(win);
@@ -58,5 +57,4 @@ public class Roulette {
 
         return win;
     }
-
 }

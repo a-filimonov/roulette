@@ -15,6 +15,16 @@ public class SingleBet extends Bet {
     }
 
     @Override
+    protected boolean winCondition(Field field) {
+        return field.equals(this.field);
+    }
+
+    @Override
+    protected int multiplier() {
+        return 37;
+    }
+
+    @Override
     public String toString() {
         return field.toString();
     }

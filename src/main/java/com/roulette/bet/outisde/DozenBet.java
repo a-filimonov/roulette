@@ -1,6 +1,7 @@
 package com.roulette.bet.outisde;
 
 import com.roulette.bet.Bet;
+import com.roulette.core.Field;
 import lombok.Getter;
 
 @Getter
@@ -14,7 +15,20 @@ public class DozenBet extends Bet {
     }
 
     public enum Dozen {
-        FIRST, SECOND, THIRD
+        FIRST, SECOND, THIRD;
+    }
+
+    @Override
+    protected boolean winCondition(Field field) {
+        if (field.isZero()) {
+            return false;
+        }
+        return field.isDozen(this.getDozen());
+    }
+
+    @Override
+    protected int multiplier() {
+        return 3;
     }
 
     @Override
