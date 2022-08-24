@@ -3,12 +3,12 @@ package com.roulette.core.bet.strategy;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.DozenBet;
 import com.roulette.core.field.Field;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class RandomDozen implements BetStrategy {
+public class RandomDozen extends NoWinBetStrategy {
 
-    private final long bet;
+    public RandomDozen(long bet) {
+        super(bet);
+    }
 
     @Override
     public String getName() {
@@ -16,7 +16,7 @@ public class RandomDozen implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
+    public Bet apply() {
         return new DozenBet(bet, Field.Dozen.random());
     }
 }

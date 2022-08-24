@@ -3,12 +3,12 @@ package com.roulette.core.bet.strategy;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.inside.SplitBet;
 import com.roulette.core.field.SplitRegistry;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class RandomSplit implements BetStrategy {
+public class RandomSplit extends NoWinBetStrategy {
 
-    private final long bet;
+    public RandomSplit(long bet) {
+        super(bet);
+    }
 
     @Override
     public String getName() {
@@ -16,7 +16,7 @@ public class RandomSplit implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
+    public Bet apply() {
         return new SplitBet(bet, SplitRegistry.random());
     }
 }

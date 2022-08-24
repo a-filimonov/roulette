@@ -3,12 +3,13 @@ package com.roulette.core.bet.strategy;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.ColorBet;
 
-public class DoubleBetColorStrategy implements BetStrategy {
+public class DoubleBetColorStrategy extends NoWinBetStrategy {
 
-    protected ColorBet bet;
+    protected ColorBet colorBet;
 
-    public DoubleBetColorStrategy(ColorBet bet) {
-        this.bet = bet;
+    public DoubleBetColorStrategy(ColorBet colorBet) {
+        super(colorBet.getBet());
+        this.colorBet = colorBet;
     }
 
     @Override
@@ -17,8 +18,8 @@ public class DoubleBetColorStrategy implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
-        this.bet = this.bet.doubled();
-        return this.bet;
+    public Bet apply() {
+        this.colorBet = this.colorBet.doubled();
+        return this.colorBet;
     }
 }

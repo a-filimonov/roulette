@@ -3,12 +3,12 @@ package com.roulette.core.bet.strategy;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.HalfBet;
 import com.roulette.util.BooleanUtil;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class RandomHalf implements BetStrategy {
+public class RandomHalf extends NoWinBetStrategy {
 
-    private final long bet;
+    public RandomHalf(long bet) {
+        super(bet);
+    }
 
     @Override
     public String getName() {
@@ -16,7 +16,7 @@ public class RandomHalf implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
+    public Bet apply() {
         return new HalfBet(bet, BooleanUtil.flipCoin());
     }
 }

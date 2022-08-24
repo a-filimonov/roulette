@@ -3,12 +3,12 @@ package com.roulette.core.bet.strategy;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.EvenBet;
 import com.roulette.util.BooleanUtil;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class RandomOddEven implements BetStrategy {
+public class RandomOddEven extends NoWinBetStrategy {
 
-    private final long bet;
+    public RandomOddEven(long bet) {
+        super(bet);
+    }
 
     @Override
     public String getName() {
@@ -16,7 +16,7 @@ public class RandomOddEven implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
+    public Bet apply() {
         return new EvenBet(bet, BooleanUtil.flipCoin());
     }
 }

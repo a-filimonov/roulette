@@ -3,12 +3,12 @@ package com.roulette.core.bet.strategy;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.ColumnBet;
 import com.roulette.core.field.Field;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class RandomColumn implements BetStrategy {
+public class RandomColumn extends NoWinBetStrategy {
 
-    private final long bet;
+    public RandomColumn(long bet) {
+        super(bet);
+    }
 
     @Override
     public String getName() {
@@ -16,7 +16,7 @@ public class RandomColumn implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
+    public Bet apply() {
         return new ColumnBet(bet, Field.Column.random());
     }
 }

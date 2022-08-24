@@ -3,12 +3,12 @@ package com.roulette.core.bet.strategy;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.inside.SingleBet;
 import com.roulette.core.field.FieldRegistry;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class RandomField implements BetStrategy {
+public class RandomField extends NoWinBetStrategy {
 
-    private final long bet;
+    public RandomField(long bet) {
+        super(bet);
+    }
 
     @Override
     public String getName() {
@@ -16,7 +16,7 @@ public class RandomField implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
+    public Bet apply() {
         return new SingleBet(bet, FieldRegistry.random());
     }
 }

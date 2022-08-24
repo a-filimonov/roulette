@@ -18,7 +18,7 @@ public class MartingaleStrategy extends DoubleBetColorStrategy {
 
     @Override
     public Bet apply(Long win) {
-        this.currentBet = win == 0 ? this.currentBet.doubled() : this.bet;
+        this.currentBet = win == 0 ? this.currentBet.doubled() : this.colorBet;
         return this.currentBet;
     }
 
