@@ -1,5 +1,6 @@
 package com.roulette.strategy;
 
+import com.roulette.bet.Bet;
 import com.roulette.bet.outisde.ColorBet;
 
 /**
@@ -16,8 +17,13 @@ public class MartingaleStrategy extends DoubleBetColorStrategy {
     }
 
     @Override
-    public ColorBet apply(Long win) {
+    public Bet apply(Long win) {
         this.currentBet = win == 0 ? this.currentBet.doubled() : this.bet;
         return this.currentBet;
+    }
+
+    @Override
+    public String getName() {
+        return "Martingale strategy";
     }
 }

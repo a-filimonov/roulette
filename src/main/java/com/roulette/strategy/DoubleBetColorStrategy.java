@@ -1,11 +1,9 @@
 package com.roulette.strategy;
 
-import java.util.function.Function;
-
 import com.roulette.bet.Bet;
 import com.roulette.bet.outisde.ColorBet;
 
-public class DoubleBetColorStrategy implements Function<Long, Bet> {
+public class DoubleBetColorStrategy implements BetStrategy {
 
     protected ColorBet bet;
 
@@ -14,7 +12,12 @@ public class DoubleBetColorStrategy implements Function<Long, Bet> {
     }
 
     @Override
-    public ColorBet apply(Long win) {
+    public String getName() {
+        return "[NEEDS A FIX] Doubles the bet every turn";
+    }
+
+    @Override
+    public Bet apply(Long win) {
         this.bet = this.bet.doubled();
         return this.bet;
     }

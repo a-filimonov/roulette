@@ -1,6 +1,5 @@
 package com.roulette;
 
-import java.util.function.Function;
 import java.util.stream.Stream;
 
 import com.roulette.bet.Bet;
@@ -13,17 +12,22 @@ import com.roulette.bet.outisde.EvenBet;
 import com.roulette.bet.outisde.HalfBet;
 import com.roulette.core.Field;
 import com.roulette.core.Field.Color;
-import com.roulette.core.FieldRegistry;
 import com.roulette.core.Split;
-import com.roulette.core.SplitRegistry;
 import com.roulette.core.User;
 import com.roulette.exception.EndGameException;
 import com.roulette.log.Log;
 import com.roulette.stats.Stats;
+import com.roulette.strategy.BetStrategy;
 import com.roulette.strategy.DoubleBetColorStrategy;
 import com.roulette.strategy.MartingaleStrategy;
+import com.roulette.strategy.RandomColor;
+import com.roulette.strategy.RandomColumn;
+import com.roulette.strategy.RandomDozen;
+import com.roulette.strategy.RandomField;
+import com.roulette.strategy.RandomHalf;
+import com.roulette.strategy.RandomOddEven;
+import com.roulette.strategy.RandomSplit;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -33,7 +37,6 @@ import static com.roulette.core.Field.Color.RED;
 import static com.roulette.core.FieldRegistry.F_17;
 import static com.roulette.core.FieldRegistry.ZERO;
 import static com.roulette.core.SplitRegistry.S_1_2;
-import static com.roulette.util.BooleanUtil.flipCoin;
 
 class RouletteTest {
 
@@ -60,49 +63,12 @@ class RouletteTest {
         }
     }
 
-    @RepeatedTest(ITERATIONS)
-    void roulette_double_bet_when_lost_martingale_strategy() {
-        play(roulette("Martingale strategy"), new MartingaleStrategy(colorBet(RED)));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_double_bet() {
-        play(roulette("Doubles the bet every turn"), new DoubleBetColorStrategy(colorBet(RED)));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_random_color() {
-        play(roulette("Random Color"), bet -> colorBet(Color.random()));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_random_odd() {
-        play(roulette("Random Odd/Even"), bet -> evenBet(flipCoin()));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_random_half() {
-        play(roulette("Random Half"), bet -> halfBet(flipCoin()));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_random_dozen() {
-        play(roulette("Random Dozen"), bet -> dozenBet(Field.Dozen.random()));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_random_column() {
-        play(roulette("Random Column"), bet -> columnBet(Field.Column.random()));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_random_split() {
-        play(roulette("Random Split"), bet -> splitBet(SplitRegistry.random()));
-    }
-
-    @RepeatedTest(ITERATIONS)
-    void roulette_always_random_field() {
-        play(roulette("Random Field"), bet -> singleBet(FieldRegistry.random()));
+    @ParameterizedTest
+    @MethodSource(value = "betStrategyTestCases")
+    void shouldPlayRouletteWithGivenBetStrategy(BetStrategy betStrategy) {
+        for (int i = 0; i < ITERATIONS; i++) {
+            play(roulette(betStrategy.getName()), betStrategy);
+        }
     }
 
     private static Stream<Arguments> betTestCases() {
@@ -125,6 +91,20 @@ class RouletteTest {
         );
     }
 
+    private static Stream<Arguments> betStrategyTestCases() {
+        return Stream.of(
+            Arguments.of(new MartingaleStrategy(colorBet(RED))),
+            Arguments.of(new DoubleBetColorStrategy(colorBet(RED))),    //TODO fix repeats of this strat
+            Arguments.of(new RandomColor(BET)),
+            Arguments.of(new RandomOddEven(BET)),
+            Arguments.of(new RandomHalf(BET)),
+            Arguments.of(new RandomDozen(BET)),
+            Arguments.of(new RandomColumn(BET)),
+            Arguments.of(new RandomSplit(BET)),
+            Arguments.of(new RandomField(BET))
+        );
+    }
+
     private static void play(Roulette roulette, Bet bet) {
         try {
             while (true) {
@@ -135,11 +115,11 @@ class RouletteTest {
         }
     }
 
-    private static void play(Roulette roulette, Function<Long, Bet> betFunction) {
+    private static void play(Roulette roulette, BetStrategy betStrategy) {
         try {
-            Long win = roulette.play(betFunction.apply(10L));
+            Long win = roulette.play(betStrategy.apply(10L));
             while (true) {
-                win = roulette.play(betFunction.apply(win));
+                win = roulette.play(betStrategy.apply(win));
             }
         } catch (EndGameException e) {
             // stop roulette
