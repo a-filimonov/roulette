@@ -20,7 +20,7 @@ public class ColorBet extends Bet {
 
     @Override
     protected boolean winCondition(Field field) {
-        return this.color.equals(field.getColor());
+        return field.getColor().equals(color);
     }
 
     @Override

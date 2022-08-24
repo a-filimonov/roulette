@@ -23,7 +23,7 @@ public class DozenBet extends Bet {
         if (field.isZero()) {
             return false;
         }
-        return field.isDozen(this.getDozen());
+        return field.isDozen(dozen);
     }
 
     @Override

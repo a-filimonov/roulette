@@ -19,7 +19,7 @@ public class HalfBet extends Bet {
         if (field.isZero()) {
             return false;
         }
-        return this.firstHalf && field.isFirstHalf() || !this.firstHalf && !field.isFirstHalf();
+        return (field.isFirstHalf() && firstHalf) || (!field.isFirstHalf() && !firstHalf);
     }
 
     @Override

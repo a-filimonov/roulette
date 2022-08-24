@@ -12,7 +12,7 @@ public abstract class Bet {
     private final long bet;
 
     public long pay(Field field) {
-        return winCondition(field) ?  bet * multiplier() : NO_WIN;
+        return winCondition(field) ? bet * multiplier() : NO_WIN;
     }
 
     protected abstract boolean winCondition(Field field);

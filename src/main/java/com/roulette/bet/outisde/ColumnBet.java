@@ -23,7 +23,7 @@ public class ColumnBet extends Bet {
         if (field.isZero()) {
             return false;
         }
-        return field.isInColumn(this.getColumn());
+        return field.isInColumn(column);
     }
 
     @Override

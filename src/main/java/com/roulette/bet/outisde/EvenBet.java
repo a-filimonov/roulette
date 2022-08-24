@@ -19,7 +19,7 @@ public class EvenBet extends Bet {
         if (field.isZero()) {
             return false;
         }
-        return (this.even && field.isEven()) || (!this.even && !field.isEven());
+        return (field.isEven() && even) || (!field.isEven() && !even);
     }
 
     @Override
