@@ -6,9 +6,7 @@ import java.util.Random;
 import com.roulette.core.field.Field.Column;
 import com.roulette.core.field.Field.Dozen;
 
-import static com.roulette.core.field.Field.Color.BLK;
-import static com.roulette.core.field.Field.Color.GRN;
-import static com.roulette.core.field.Field.Color.RED;
+import static com.roulette.core.field.Field.Color.*;
 
 public class FieldRegistry {
     public static final Field ZERO = new Field(0, GRN, null, null);

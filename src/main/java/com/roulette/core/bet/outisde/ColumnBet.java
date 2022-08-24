@@ -31,11 +31,11 @@ public class ColumnBet extends Bet {
     public String toString() {
         switch (column) {
             case C1:
-                return "1-34";
+                return "Column 1-34";
             case C2:
-                return "2-35";
+                return "Column 2-35";
             default:
-                return "3-36";
+                return "Column 3-36";
         }
     }
 }

@@ -25,6 +25,6 @@ public class SplitBet extends Bet {
 
     @Override
     public String toString() {
-        return split.getF1().toString() + ":" + split.getF2().toString();
+        return String.format("Split %s:%s", split.getF1().getNumber(), split.getF2().getNumber());
     }
 }

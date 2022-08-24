@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import com.roulette.core.bet.Bet;
+import com.roulette.core.bet.inside.CornerBet;
 import com.roulette.core.bet.inside.SingleBet;
 import com.roulette.core.bet.inside.SplitBet;
 import com.roulette.core.bet.inside.StreetBet;
@@ -17,12 +18,14 @@ import com.roulette.core.bet.strategy.DoubleBetColorStrategy;
 import com.roulette.core.bet.strategy.MartingaleStrategy;
 import com.roulette.core.bet.strategy.RandomColor;
 import com.roulette.core.bet.strategy.RandomColumn;
+import com.roulette.core.bet.strategy.RandomCorner;
 import com.roulette.core.bet.strategy.RandomDozen;
 import com.roulette.core.bet.strategy.RandomField;
 import com.roulette.core.bet.strategy.RandomHalf;
 import com.roulette.core.bet.strategy.RandomOddEven;
 import com.roulette.core.bet.strategy.RandomSplit;
 import com.roulette.core.bet.strategy.RandomStreet;
+import com.roulette.core.field.Corner;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Field.Color;
 import com.roulette.core.field.Split;
@@ -36,12 +39,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static com.roulette.core.field.CornerRegistry.C_14_15_17_18;
 import static com.roulette.core.field.Field.Color.BLK;
 import static com.roulette.core.field.Field.Color.RED;
 import static com.roulette.core.field.FieldRegistry.F_17;
 import static com.roulette.core.field.FieldRegistry.ZERO;
 import static com.roulette.core.field.SplitRegistry.S_1_2;
 import static com.roulette.core.field.StreetRegistry.S_13_14_15;
+import static org.junit.jupiter.params.provider.Arguments.*;
 
 class RouletteTest {
 
@@ -56,7 +61,7 @@ class RouletteTest {
         STATS.getAll().entrySet().forEach(e -> {
             String name = e.getKey().getName();
             System.out.printf("Roulette [%s]:\n", name);
-            e.getValue().forEach(stat -> System.out.printf("\t%s. PAYOUT: %.2f%%\n", stat, stat.payout()));
+            e.getValue().forEach(stat -> System.out.printf("\t%s\n", stat));
         });
     }
 
@@ -78,37 +83,39 @@ class RouletteTest {
 
     private static Stream<Arguments> betTestCases() {
         return Stream.of(
-            Arguments.of(colorBet(RED)),
-            Arguments.of(colorBet(BLK)),
-            Arguments.of(evenBet(true)),
-            Arguments.of(evenBet(false)),
-            Arguments.of(halfBet(true)),
-            Arguments.of(halfBet(false)),
-            Arguments.of(dozenBet(Field.Dozen.D1)),
-            Arguments.of(dozenBet(Field.Dozen.D2)),
-            Arguments.of(dozenBet(Field.Dozen.D3)),
-            Arguments.of(columnBet(Field.Column.C1)),
-            Arguments.of(columnBet(Field.Column.C2)),
-            Arguments.of(columnBet(Field.Column.C3)),
-            Arguments.of(singleBet(ZERO)),
-            Arguments.of(singleBet(F_17)),
-            Arguments.of(splitBet(S_1_2)),
-            Arguments.of(streetBet(S_13_14_15))
+            of(colorBet(RED)),
+            of(colorBet(BLK)),
+            of(evenBet(true)),
+            of(evenBet(false)),
+            of(halfBet(true)),
+            of(halfBet(false)),
+            of(dozenBet(Field.Dozen.D1)),
+            of(dozenBet(Field.Dozen.D2)),
+            of(dozenBet(Field.Dozen.D3)),
+            of(columnBet(Field.Column.C1)),
+            of(columnBet(Field.Column.C2)),
+            of(columnBet(Field.Column.C3)),
+            of(singleBet(ZERO)),
+            of(singleBet(F_17)),
+            of(splitBet(S_1_2)),
+            of(streetBet(S_13_14_15)),
+            of(cornerBet(C_14_15_17_18))
         );
     }
 
     private static Stream<Arguments> betStrategyTestCases() {
         return Stream.of(
-            Arguments.of(new MartingaleStrategy(colorBet(RED))),
-            Arguments.of(new DoubleBetColorStrategy(colorBet(RED))),    //TODO fix repeats of this strat
-            Arguments.of(new RandomColor(BET)),
-            Arguments.of(new RandomOddEven(BET)),
-            Arguments.of(new RandomHalf(BET)),
-            Arguments.of(new RandomDozen(BET)),
-            Arguments.of(new RandomColumn(BET)),
-            Arguments.of(new RandomSplit(BET)),
-            Arguments.of(new RandomField(BET)),
-            Arguments.of(new RandomStreet(BET))
+            of(new MartingaleStrategy(colorBet(RED))),
+            of(new DoubleBetColorStrategy(colorBet(RED))),    //TODO fix repeats of this strat
+            of(new RandomColor(BET)),
+            of(new RandomOddEven(BET)),
+            of(new RandomHalf(BET)),
+            of(new RandomDozen(BET)),
+            of(new RandomColumn(BET)),
+            of(new RandomSplit(BET)),
+            of(new RandomField(BET)),
+            of(new RandomStreet(BET)),
+            of(new RandomCorner(BET))
         );
     }
 
@@ -170,5 +177,9 @@ class RouletteTest {
 
     private static Bet streetBet(Street street) {
         return new StreetBet(BET, street);
+    }
+
+    private static Bet cornerBet(Corner corner) {
+        return new CornerBet(BET, corner);
     }
 }

@@ -27,18 +27,19 @@ public class Roulette {
         this.id = UUID.randomUUID().toString();
         this.user = user;
         this.log = log;
-        this.stats = new Stats.RouletteStats();
+        this.stats = new Stats.RouletteStats(user.getBalance());
         this.wheel = new RouletteWheel(stats);
     }
 
     public long play(List<Bet> bets) {
-        Field field = wheel.turn();
-        log.debug("%s :: ", stats.getTurns());
         var totalBet = bets.stream().mapToLong(Bet::getBet).sum();
-
         if (!user.isAbleToBet(totalBet)) {
             throw new EndGameException(user);
         }
+
+        Field field = wheel.turn();
+        log.debug("%s :: ", stats.getTurns());
+
         user.bet(totalBet);
         stats.addBet(totalBet);
         bets.forEach(bet -> log.debug("[%s] bets %s on %s :: [%s] :: ", user.getName(), totalBet, bet, field));

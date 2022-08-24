@@ -27,6 +27,6 @@ public class StreetBet extends Bet {
 
     @Override
     public String toString() {
-        return street.getF1().toString() + ":" + street.getF2().toString() + ":" + street.getF3().toString();
+        return String.format("Street %s:%s:%s", street.getF1().getNumber(), street.getF2().getNumber(), street.getF3().getNumber());
     }
 }
