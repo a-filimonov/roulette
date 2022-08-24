@@ -2,6 +2,10 @@ package com.roulette.strategy;
 
 import com.roulette.bet.outisde.ColorBet;
 
+/**
+ * User doubles the bet every time he loses
+ * Returns to initial bet when won
+ */
 public class MartingaleStrategy extends DoubleBetColorStrategy {
 
     private ColorBet currentBet;

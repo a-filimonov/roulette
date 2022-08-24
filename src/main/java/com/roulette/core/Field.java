@@ -27,10 +27,22 @@ public class Field {
 
     public enum Dozen {
         D1, D2, D3;
+
+        private static final Random RANDOM = new Random();
+
+        public static Dozen random() {
+            return Arrays.asList(values()).get(RANDOM.nextInt(values().length));
+        }
     }
 
     public enum Column {
-        C1, C2, C3
+        C1, C2, C3;
+
+        private static final Random RANDOM = new Random();
+
+        public static Column random() {
+            return Arrays.asList(values()).get(RANDOM.nextInt(values().length));
+        }
     }
 
     public boolean isZero() {
