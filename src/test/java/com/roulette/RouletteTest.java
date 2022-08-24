@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.inside.SingleBet;
 import com.roulette.core.bet.inside.SplitBet;
+import com.roulette.core.bet.inside.StreetBet;
 import com.roulette.core.bet.outisde.ColorBet;
 import com.roulette.core.bet.outisde.ColumnBet;
 import com.roulette.core.bet.outisde.DozenBet;
@@ -21,9 +22,11 @@ import com.roulette.core.bet.strategy.RandomField;
 import com.roulette.core.bet.strategy.RandomHalf;
 import com.roulette.core.bet.strategy.RandomOddEven;
 import com.roulette.core.bet.strategy.RandomSplit;
+import com.roulette.core.bet.strategy.RandomStreet;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Field.Color;
 import com.roulette.core.field.Split;
+import com.roulette.core.field.Street;
 import com.roulette.core.user.User;
 import com.roulette.exception.EndGameException;
 import com.roulette.log.Log;
@@ -38,6 +41,7 @@ import static com.roulette.core.field.Field.Color.RED;
 import static com.roulette.core.field.FieldRegistry.F_17;
 import static com.roulette.core.field.FieldRegistry.ZERO;
 import static com.roulette.core.field.SplitRegistry.S_1_2;
+import static com.roulette.core.field.StreetRegistry.S_13_14_15;
 
 class RouletteTest {
 
@@ -88,7 +92,8 @@ class RouletteTest {
             Arguments.of(columnBet(Field.Column.C3)),
             Arguments.of(singleBet(ZERO)),
             Arguments.of(singleBet(F_17)),
-            Arguments.of(splitBet(S_1_2))
+            Arguments.of(splitBet(S_1_2)),
+            Arguments.of(streetBet(S_13_14_15))
         );
     }
 
@@ -102,7 +107,8 @@ class RouletteTest {
             Arguments.of(new RandomDozen(BET)),
             Arguments.of(new RandomColumn(BET)),
             Arguments.of(new RandomSplit(BET)),
-            Arguments.of(new RandomField(BET))
+            Arguments.of(new RandomField(BET)),
+            Arguments.of(new RandomStreet(BET))
         );
     }
 
@@ -160,5 +166,9 @@ class RouletteTest {
 
     private static Bet splitBet(Split split) {
         return new SplitBet(BET, split);
+    }
+
+    private static Bet streetBet(Street street) {
+        return new StreetBet(BET, street);
     }
 }
