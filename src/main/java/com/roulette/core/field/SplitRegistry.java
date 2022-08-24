@@ -3,45 +3,13 @@ package com.roulette.core.field;
 import java.util.List;
 import java.util.Random;
 
-import static com.roulette.core.field.FieldRegistry.F_1;
-import static com.roulette.core.field.FieldRegistry.F_10;
-import static com.roulette.core.field.FieldRegistry.F_11;
-import static com.roulette.core.field.FieldRegistry.F_12;
-import static com.roulette.core.field.FieldRegistry.F_13;
-import static com.roulette.core.field.FieldRegistry.F_14;
-import static com.roulette.core.field.FieldRegistry.F_15;
-import static com.roulette.core.field.FieldRegistry.F_16;
-import static com.roulette.core.field.FieldRegistry.F_17;
-import static com.roulette.core.field.FieldRegistry.F_18;
-import static com.roulette.core.field.FieldRegistry.F_19;
-import static com.roulette.core.field.FieldRegistry.F_2;
-import static com.roulette.core.field.FieldRegistry.F_20;
-import static com.roulette.core.field.FieldRegistry.F_21;
-import static com.roulette.core.field.FieldRegistry.F_22;
-import static com.roulette.core.field.FieldRegistry.F_23;
-import static com.roulette.core.field.FieldRegistry.F_24;
-import static com.roulette.core.field.FieldRegistry.F_25;
-import static com.roulette.core.field.FieldRegistry.F_26;
-import static com.roulette.core.field.FieldRegistry.F_27;
-import static com.roulette.core.field.FieldRegistry.F_28;
-import static com.roulette.core.field.FieldRegistry.F_29;
-import static com.roulette.core.field.FieldRegistry.F_3;
-import static com.roulette.core.field.FieldRegistry.F_30;
-import static com.roulette.core.field.FieldRegistry.F_31;
-import static com.roulette.core.field.FieldRegistry.F_32;
-import static com.roulette.core.field.FieldRegistry.F_33;
-import static com.roulette.core.field.FieldRegistry.F_34;
-import static com.roulette.core.field.FieldRegistry.F_35;
-import static com.roulette.core.field.FieldRegistry.F_36;
-import static com.roulette.core.field.FieldRegistry.F_4;
-import static com.roulette.core.field.FieldRegistry.F_5;
-import static com.roulette.core.field.FieldRegistry.F_6;
-import static com.roulette.core.field.FieldRegistry.F_7;
-import static com.roulette.core.field.FieldRegistry.F_8;
-import static com.roulette.core.field.FieldRegistry.F_9;
+import static com.roulette.core.field.FieldRegistry.*;
 
 public class SplitRegistry {
 
+    public static final Split S_0_1 = new Split(ZERO, F_1);
+    public static final Split S_0_2 = new Split(ZERO, F_2);
+    public static final Split S_0_3 = new Split(ZERO, F_3);
     public static final Split S_1_2 = new Split(F_1, F_2);
     public static final Split S_1_4 = new Split(F_1, F_4);
     public static final Split S_2_3 = new Split(F_2, F_3);
@@ -107,6 +75,9 @@ public class SplitRegistry {
     }
 
     public static final List<Split> SPLITS = List.of(
+        S_0_1,
+        S_0_2,
+        S_0_3,
         S_1_2,
         S_1_4,
         S_2_3,
