@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class ColorBet extends Bet {
 
+    //TODO refactor to use boolean -> extend from BooleanBet
     private final Field.Color color;
 
     public ColorBet(long bet, Field.Color color) {

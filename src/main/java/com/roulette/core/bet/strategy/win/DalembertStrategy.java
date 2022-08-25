@@ -24,7 +24,7 @@ public class DalembertStrategy implements BetStrategy {
 
     @Override
     public String getName() {
-        return "Martingale strategy";
+        return "D'Alembert strategy";
     }
 
     @Override

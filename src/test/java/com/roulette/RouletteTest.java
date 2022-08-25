@@ -17,6 +17,7 @@ import com.roulette.core.bet.outisde.HalfBet;
 import com.roulette.core.bet.strategy.BetStrategy;
 import com.roulette.core.bet.strategy.nowin.DoubleBetColorStrategy;
 import com.roulette.core.bet.strategy.win.DalembertStrategy;
+import com.roulette.core.bet.strategy.win.FibonacciStrategy;
 import com.roulette.core.bet.strategy.win.GrandMartingaleStrategy;
 import com.roulette.core.bet.strategy.win.MartingaleStrategy;
 import com.roulette.core.bet.strategy.nowin.RandomColor;
@@ -119,6 +120,7 @@ class RouletteTest {
             of(new GrandMartingaleStrategy(colorBet(RED))),
             of(new DoubleBetColorStrategy(colorBet(RED))),    //TODO fix repeats of this strat
             of(new DalembertStrategy(colorBet(RED))),
+            of(new FibonacciStrategy(colorBet(RED))),
             of(new RandomColor(BET)),
             of(new RandomOddEven(BET)),
             of(new RandomHalf(BET)),
