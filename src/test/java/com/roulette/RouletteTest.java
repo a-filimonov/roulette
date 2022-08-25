@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.inside.CornerBet;
+import com.roulette.core.bet.inside.LineBet;
 import com.roulette.core.bet.inside.SingleBet;
 import com.roulette.core.bet.inside.SplitBet;
 import com.roulette.core.bet.inside.StreetBet;
@@ -23,12 +24,14 @@ import com.roulette.core.bet.strategy.RandomCorner;
 import com.roulette.core.bet.strategy.RandomDozen;
 import com.roulette.core.bet.strategy.RandomField;
 import com.roulette.core.bet.strategy.RandomHalf;
+import com.roulette.core.bet.strategy.RandomLine;
 import com.roulette.core.bet.strategy.RandomOddEven;
 import com.roulette.core.bet.strategy.RandomSplit;
 import com.roulette.core.bet.strategy.RandomStreet;
 import com.roulette.core.field.Corner;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Field.Color;
+import com.roulette.core.field.Line;
 import com.roulette.core.field.Split;
 import com.roulette.core.field.Street;
 import com.roulette.core.user.User;
@@ -45,6 +48,7 @@ import static com.roulette.core.field.Field.Color.BLK;
 import static com.roulette.core.field.Field.Color.RED;
 import static com.roulette.core.field.FieldRegistry.F_17;
 import static com.roulette.core.field.FieldRegistry.ZERO;
+import static com.roulette.core.field.LineRegistry.L_4;
 import static com.roulette.core.field.SplitRegistry.S_1_2;
 import static com.roulette.core.field.StreetRegistry.S_13_14_15;
 import static org.junit.jupiter.params.provider.Arguments.*;
@@ -101,7 +105,8 @@ class RouletteTest {
             of(singleBet(F_17)),
             of(splitBet(S_1_2)),
             of(streetBet(S_13_14_15)),
-            of(cornerBet(C_14_15_17_18))
+            of(cornerBet(C_14_15_17_18)),
+            of(lineBet(L_4))
         );
     }
 
@@ -117,7 +122,8 @@ class RouletteTest {
             of(new RandomSplit(BET)),
             of(new RandomField(BET)),
             of(new RandomStreet(BET)),
-            of(new RandomCorner(BET))
+            of(new RandomCorner(BET)),
+            of(new RandomLine(BET))
         );
     }
 
@@ -183,5 +189,9 @@ class RouletteTest {
 
     private static Bet cornerBet(Corner corner) {
         return new CornerBet(BET, corner);
+    }
+
+    private static Bet lineBet(Line line) {
+        return new LineBet(BET, line);
     }
 }
