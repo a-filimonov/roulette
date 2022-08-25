@@ -1,9 +1,7 @@
-package com.roulette.core.bet.strategy;
+package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.inside.SplitBet;
 import com.roulette.core.bet.inside.StreetBet;
-import com.roulette.core.field.SplitRegistry;
 import com.roulette.core.field.StreetRegistry;
 
 public class RandomStreet extends NoWinBetStrategy {

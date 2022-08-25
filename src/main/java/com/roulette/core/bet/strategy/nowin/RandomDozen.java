@@ -1,4 +1,4 @@
-package com.roulette.core.bet.strategy;
+package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.DozenBet;

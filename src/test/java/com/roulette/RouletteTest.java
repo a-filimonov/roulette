@@ -1,7 +1,6 @@
 package com.roulette;
 
 import java.util.List;
-import java.util.SortedSet;
 import java.util.stream.Stream;
 
 import com.roulette.core.bet.Bet;
@@ -16,18 +15,19 @@ import com.roulette.core.bet.outisde.DozenBet;
 import com.roulette.core.bet.outisde.EvenBet;
 import com.roulette.core.bet.outisde.HalfBet;
 import com.roulette.core.bet.strategy.BetStrategy;
-import com.roulette.core.bet.strategy.DoubleBetColorStrategy;
-import com.roulette.core.bet.strategy.MartingaleStrategy;
-import com.roulette.core.bet.strategy.RandomColor;
-import com.roulette.core.bet.strategy.RandomColumn;
-import com.roulette.core.bet.strategy.RandomCorner;
-import com.roulette.core.bet.strategy.RandomDozen;
-import com.roulette.core.bet.strategy.RandomField;
-import com.roulette.core.bet.strategy.RandomHalf;
-import com.roulette.core.bet.strategy.RandomLine;
-import com.roulette.core.bet.strategy.RandomOddEven;
-import com.roulette.core.bet.strategy.RandomSplit;
-import com.roulette.core.bet.strategy.RandomStreet;
+import com.roulette.core.bet.strategy.nowin.DoubleBetColorStrategy;
+import com.roulette.core.bet.strategy.win.GrandMartingaleStrategy;
+import com.roulette.core.bet.strategy.win.MartingaleStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomColor;
+import com.roulette.core.bet.strategy.nowin.RandomColumn;
+import com.roulette.core.bet.strategy.nowin.RandomCorner;
+import com.roulette.core.bet.strategy.nowin.RandomDozen;
+import com.roulette.core.bet.strategy.nowin.RandomField;
+import com.roulette.core.bet.strategy.nowin.RandomHalf;
+import com.roulette.core.bet.strategy.nowin.RandomLine;
+import com.roulette.core.bet.strategy.nowin.RandomOddEven;
+import com.roulette.core.bet.strategy.nowin.RandomSplit;
+import com.roulette.core.bet.strategy.nowin.RandomStreet;
 import com.roulette.core.field.Corner;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Field.Color;
@@ -113,6 +113,7 @@ class RouletteTest {
     private static Stream<Arguments> betStrategyTestCases() {
         return Stream.of(
             of(new MartingaleStrategy(colorBet(RED))),
+            of(new GrandMartingaleStrategy(colorBet(RED))),
             of(new DoubleBetColorStrategy(colorBet(RED))),    //TODO fix repeats of this strat
             of(new RandomColor(BET)),
             of(new RandomOddEven(BET)),

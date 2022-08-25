@@ -18,6 +18,10 @@ public class ColorBet extends Bet {
         return new ColorBet(getBet() * 2, color);
     }
 
+    public ColorBet doubledAnd(long extraBet) {
+        return new ColorBet(getBet() * 2 + extraBet, color);
+    }
+
     @Override
     protected boolean winCondition(Field field) {
         return field.getColor().equals(color);
