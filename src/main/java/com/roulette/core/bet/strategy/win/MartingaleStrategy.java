@@ -1,7 +1,7 @@
 package com.roulette.core.bet.strategy.win;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.ColorBet;
+import com.roulette.core.bet.outisde.bool.BooleanBet;
 import com.roulette.core.bet.strategy.BetStrategy;
 
 /**
@@ -10,10 +10,10 @@ import com.roulette.core.bet.strategy.BetStrategy;
  */
 public class MartingaleStrategy implements BetStrategy {
 
-    private final ColorBet initialBet;
-    private ColorBet currentBet;
+    private final BooleanBet initialBet;
+    private BooleanBet currentBet;
 
-    public MartingaleStrategy(ColorBet bet) {
+    public MartingaleStrategy(BooleanBet bet) {
         this.initialBet = bet; // save
         this.currentBet = bet;
     }

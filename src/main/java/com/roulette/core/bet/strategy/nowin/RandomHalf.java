@@ -1,7 +1,7 @@
 package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.HalfBet;
+import com.roulette.core.bet.outisde.bool.HalfBet;
 import com.roulette.util.BooleanUtil;
 
 public class RandomHalf extends NoWinBetStrategy {

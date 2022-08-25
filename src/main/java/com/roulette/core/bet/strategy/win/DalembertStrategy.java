@@ -1,24 +1,24 @@
 package com.roulette.core.bet.strategy.win;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.ColorBet;
+import com.roulette.core.bet.outisde.bool.BooleanBet;
 import com.roulette.core.bet.strategy.BetStrategy;
 
 /**
- * User adds 1 from the bet stake every time he loses
- * User removes 1 to the bet stake every time he wins
+ * User adds 1 to the bet stake every time he loses
+ * User removes 1 from the bet stake every time he wins
  */
 public class DalembertStrategy implements BetStrategy {
 
-    private ColorBet currentBet;    // TODO use even bet interface
+    private BooleanBet currentBet;
 
-    public DalembertStrategy(ColorBet bet) {
+    public DalembertStrategy(BooleanBet bet) {
         this.currentBet = bet;
     }
 
     @Override
     public Bet apply(Long win) {
-        this.currentBet = win == 0 ? this.currentBet.add(1) : this.currentBet.remove(1);
+        this.currentBet = win == 0 ? this.currentBet.add(1) : this.currentBet.add(-1);
         return this.currentBet;
     }
 

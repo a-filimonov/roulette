@@ -3,7 +3,7 @@ package com.roulette.core.bet.strategy.win;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.inside.LineBet;
 import com.roulette.core.bet.inside.SingleBet;
-import com.roulette.core.bet.outisde.HalfBet;
+import com.roulette.core.bet.outisde.bool.HalfBet;
 import com.roulette.core.bet.strategy.nowin.NoWinBetStrategy;
 
 import static com.roulette.core.field.FieldRegistry.ZERO;

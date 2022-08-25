@@ -10,11 +10,12 @@ import com.roulette.core.bet.inside.LineBet;
 import com.roulette.core.bet.inside.SingleBet;
 import com.roulette.core.bet.inside.SplitBet;
 import com.roulette.core.bet.inside.StreetBet;
-import com.roulette.core.bet.outisde.ColorBet;
+import com.roulette.core.bet.outisde.bool.ColorBet;
 import com.roulette.core.bet.outisde.ColumnBet;
 import com.roulette.core.bet.outisde.DozenBet;
-import com.roulette.core.bet.outisde.EvenBet;
-import com.roulette.core.bet.outisde.HalfBet;
+import com.roulette.core.bet.outisde.bool.BooleanBet;
+import com.roulette.core.bet.outisde.bool.EvenBet;
+import com.roulette.core.bet.outisde.bool.HalfBet;
 import com.roulette.core.bet.strategy.BetStrategy;
 import com.roulette.core.bet.strategy.nowin.RandomColor;
 import com.roulette.core.bet.strategy.nowin.RandomColumn;
@@ -28,7 +29,6 @@ import com.roulette.core.bet.strategy.nowin.RandomSplit;
 import com.roulette.core.bet.strategy.nowin.RandomStreet;
 import com.roulette.core.field.Corner;
 import com.roulette.core.field.Field;
-import com.roulette.core.field.Field.Color;
 import com.roulette.core.field.Line;
 import com.roulette.core.field.Split;
 import com.roulette.core.field.Street;
@@ -42,15 +42,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import static com.roulette.BetStrategies.dalembert;
-import static com.roulette.BetStrategies.fibonacci;
 import static com.roulette.BetStrategies.doubleBetColor;
+import static com.roulette.BetStrategies.fibonacci;
 import static com.roulette.BetStrategies.grandMartingale;
 import static com.roulette.BetStrategies.jamesBond;
 import static com.roulette.BetStrategies.martingale;
 import static com.roulette.BetStrategies.reverseMartingale;
 import static com.roulette.core.field.CornerRegistry.C_14_15_17_18;
-import static com.roulette.core.field.Field.Color.BLK;
-import static com.roulette.core.field.Field.Color.RED;
 import static com.roulette.core.field.FieldRegistry.F_17;
 import static com.roulette.core.field.FieldRegistry.ZERO;
 import static com.roulette.core.field.LineRegistry.L_10_15;
@@ -103,8 +101,8 @@ class RouletteTest {
 
     private static Stream<Arguments> betTestCases() {
         return Stream.of(
-            of(colorBet(RED)),
-            of(colorBet(BLK)),
+            of(colorBet(true)),
+            of(colorBet(false)),
             of(evenBet(true)),
             of(evenBet(false)),
             of(halfBet(true)),
@@ -125,7 +123,7 @@ class RouletteTest {
     }
 
     private static Stream<Arguments> betStrategyTestCases() {
-        var bet = colorBet(RED);
+        var bet = colorBet(true);
         var dalembert = dalembert(bet);
         var martingale = martingale(bet);
         var reverseMartingale = reverseMartingale(bet);
@@ -138,7 +136,7 @@ class RouletteTest {
             of(named(martingale.get().getName(), martingale)),
             of(named(dalembert.get().getName(), dalembert)),
             of(named(reverseMartingale.get().getName(), reverseMartingale)),
-            of(named(grandMartingale.get().getName(), grandMartingale)),
+            of(named(grandMartingale.get().getName(), grandMartingale)),    //TODO fix 4 iterations
             of(named(fibonacci.get().getName(), fibonacci)),
             of(named(jamesBond.get().getName(), jamesBond)),
             of(named(doubleBetColor.get().getName(), doubleBetColor))
@@ -188,15 +186,15 @@ class RouletteTest {
         return roulette;
     }
 
-    private static ColorBet colorBet(Color color) {
-        return new ColorBet(BET, color);
+    private static BooleanBet colorBet(boolean isRed) {
+        return new ColorBet(BET, isRed);
     }
 
-    private static EvenBet evenBet(boolean even) {
+    private static BooleanBet evenBet(boolean even) {
         return new EvenBet(BET, even);
     }
 
-    private static HalfBet halfBet(boolean firstHalf) {
+    private static BooleanBet halfBet(boolean firstHalf) {
         return new HalfBet(BET, firstHalf);
     }
 

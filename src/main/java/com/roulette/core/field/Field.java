@@ -11,19 +11,9 @@ import static com.roulette.core.field.FieldRegistry.ZERO;
 public class Field {
 
     int number;
-    Color color;
+    Boolean red;
     Dozen dozen;
     Column column;
-
-    public enum Color {
-        RED, BLK, GRN;
-
-        private static final Random RANDOM = new Random();
-
-        public static Color random() {
-            return Arrays.asList(values()).get(RANDOM.nextInt(2));  // exclude GREEN
-        }
-    }
 
     public enum Dozen {
         D1, D2, D3;
@@ -58,6 +48,6 @@ public class Field {
     }
 
     public String toString() {
-        return String.format("%02d %s", number, color);
+        return String.format("%02d %s", number, red == null ? "ZERO" : red ? "RED" : "BLK");
     }
 }

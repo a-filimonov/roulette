@@ -1,7 +1,7 @@
 package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.EvenBet;
+import com.roulette.core.bet.outisde.bool.EvenBet;
 import com.roulette.util.BooleanUtil;
 
 public class RandomOddEven extends NoWinBetStrategy {
