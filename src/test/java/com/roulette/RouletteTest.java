@@ -28,6 +28,7 @@ import com.roulette.core.bet.strategy.nowin.RandomLine;
 import com.roulette.core.bet.strategy.nowin.RandomOddEven;
 import com.roulette.core.bet.strategy.nowin.RandomSplit;
 import com.roulette.core.bet.strategy.nowin.RandomStreet;
+import com.roulette.core.bet.strategy.win.ReverseMartingaleStrategy;
 import com.roulette.core.field.Corner;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Field.Color;
@@ -113,6 +114,7 @@ class RouletteTest {
     private static Stream<Arguments> betStrategyTestCases() {
         return Stream.of(
             of(new MartingaleStrategy(colorBet(RED))),
+            of(new ReverseMartingaleStrategy(colorBet(RED))),
             of(new GrandMartingaleStrategy(colorBet(RED))),
             of(new DoubleBetColorStrategy(colorBet(RED))),    //TODO fix repeats of this strat
             of(new RandomColor(BET)),
