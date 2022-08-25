@@ -2,24 +2,25 @@ package com.roulette.core.bet.strategy.win;
 
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.ColorBet;
-import com.roulette.core.bet.strategy.nowin.DoubleBetColorStrategy;
+import com.roulette.core.bet.strategy.BetStrategy;
 
 /**
  * User doubles the bet every time he wins
  * Returns to initial bet when lost
  */
-public class ReverseMartingaleStrategy extends DoubleBetColorStrategy {
+public class ReverseMartingaleStrategy implements BetStrategy {
 
+    private final ColorBet initialBet;
     private ColorBet currentBet;
 
     public ReverseMartingaleStrategy(ColorBet bet) {
-        super(bet); // save initial bet
+        this.initialBet = bet; // save
         this.currentBet = bet;
     }
 
     @Override
     public Bet apply(Long win) {
-        this.currentBet = win > 0 ? this.currentBet.doubled() : this.colorBet;
+        this.currentBet = win > 0 ? this.currentBet.doubled() : this.initialBet;
         return this.currentBet;
     }
 
