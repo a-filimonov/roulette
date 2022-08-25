@@ -22,6 +22,14 @@ public class ColorBet extends Bet {
         return new ColorBet(getBet() * 2 + extraBet, color);
     }
 
+    public ColorBet add(long betAmount) {
+        return new ColorBet(getBet() + betAmount, color);
+    }
+
+    public ColorBet remove(long betAmount) {
+        return new ColorBet(getBet() - betAmount, color);
+    }
+
     @Override
     protected boolean winCondition(Field field) {
         return field.getColor().equals(color);
