@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public abstract class Bet<F> {
+public abstract class Bet<F extends Factor> {
     private static final long NO_WIN = 0L;
 
     protected final long bet;
@@ -20,4 +20,8 @@ public abstract class Bet<F> {
     protected abstract boolean winCondition(Field field);
 
     protected abstract int multiplier();
+
+    public abstract Bet<F> add(long amount);
+
+    public abstract Bet<F> doubled();
 }

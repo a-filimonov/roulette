@@ -1,8 +1,8 @@
 package com.roulette.core.bet.strategy.win;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.bool.BooleanBet;
 import com.roulette.core.bet.strategy.BetStrategy;
+import com.roulette.util.Boolean;
 
 /**
  * User adds 1 to the bet stake every time he loses
@@ -10,9 +10,9 @@ import com.roulette.core.bet.strategy.BetStrategy;
  */
 public class DalembertStrategy implements BetStrategy<Boolean> {
 
-    private BooleanBet currentBet;
+    private Bet<Boolean> currentBet;
 
-    public DalembertStrategy(BooleanBet bet) {
+    public DalembertStrategy(Bet<Boolean> bet) {
         this.currentBet = bet;
     }
 

@@ -1,8 +1,8 @@
 package com.roulette.core.bet.strategy.win;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.bool.BooleanBet;
 import com.roulette.core.bet.strategy.BetStrategy;
+import com.roulette.util.Boolean;
 
 /**
  * User doubles the bet every time he loses
@@ -10,10 +10,10 @@ import com.roulette.core.bet.strategy.BetStrategy;
  */
 public class MartingaleStrategy implements BetStrategy<Boolean> {
 
-    private final BooleanBet initialBet;
-    private BooleanBet currentBet;
+    private final Bet<Boolean> initialBet;
+    private Bet<Boolean> currentBet;
 
-    public MartingaleStrategy(BooleanBet bet) {
+    public MartingaleStrategy(Bet<Boolean> bet) {
         this.initialBet = bet; // save
         this.currentBet = bet;
     }

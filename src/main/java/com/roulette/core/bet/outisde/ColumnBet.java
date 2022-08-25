@@ -24,6 +24,14 @@ public class ColumnBet extends Bet<Field.Column> {
         return 3;
     }
 
+    public Bet<Field.Column> add(long amount) {
+        return new ColumnBet(bet + amount, factor);
+    }
+
+    public Bet<Field.Column> doubled() {
+        return new ColumnBet(bet * 2, factor);
+    }
+
     @Override
     public String toString() {
         switch (factor) {

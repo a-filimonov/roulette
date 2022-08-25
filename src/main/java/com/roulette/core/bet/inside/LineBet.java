@@ -22,6 +22,14 @@ public class LineBet extends Bet<Line> {
         return 5;
     }
 
+    public Bet<Line> add(long amount) {
+        return new LineBet(bet + amount, factor);
+    }
+
+    public Bet<Line> doubled() {
+        return new LineBet(bet * 2, factor);
+    }
+
     @Override
     public String toString() {
         return String.format("Line %s-%s", factor.getF1().getNumber(), factor.getF6().getNumber());

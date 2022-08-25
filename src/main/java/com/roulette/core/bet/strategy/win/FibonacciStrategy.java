@@ -1,8 +1,8 @@
 package com.roulette.core.bet.strategy.win;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.bool.BooleanBet;
 import com.roulette.core.bet.strategy.BetStrategy;
+import com.roulette.util.Boolean;
 
 /**
  * User adds 1, 2, 3, 5, 8, 13... numbers to the bet if he wins
@@ -10,12 +10,12 @@ import com.roulette.core.bet.strategy.BetStrategy;
  */
 public class FibonacciStrategy implements BetStrategy<Boolean> {
 
-    private final BooleanBet initialBet;
+    private final Bet<Boolean> initialBet;
     private int lastFib;
     private int currentFib;
-    private BooleanBet currentBet;
+    private Bet<Boolean> currentBet;
 
-    public FibonacciStrategy(BooleanBet bet) {
+    public FibonacciStrategy(Bet<Boolean> bet) {
         this.initialBet = bet; // save
         this.lastFib = 1;
         this.currentFib = 0;

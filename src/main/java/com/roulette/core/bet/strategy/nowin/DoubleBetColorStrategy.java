@@ -1,13 +1,13 @@
 package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.bool.BooleanBet;
+import com.roulette.util.Boolean;
 
 public class DoubleBetColorStrategy extends NoWinBetStrategy<Boolean> {
 
-    protected BooleanBet colorBet;
+    protected Bet<Boolean> colorBet;
 
-    public DoubleBetColorStrategy(BooleanBet bet) {
+    public DoubleBetColorStrategy(Bet<Boolean> bet) {
         super(bet.getBet());
         this.colorBet = bet;
     }

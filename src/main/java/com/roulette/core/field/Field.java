@@ -3,19 +3,20 @@ package com.roulette.core.field;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.roulette.core.bet.Factor;
 import lombok.Value;
 
 import static com.roulette.core.field.FieldRegistry.ZERO;
 
 @Value
-public class Field {
+public class Field implements Factor {
 
     int number;
     Boolean red;    // null == ZERO
     Dozen dozen;
     Column column;
 
-    public enum Dozen {
+    public enum Dozen implements Factor {
         D1, D2, D3;
 
         private static final Random RANDOM = new Random();
@@ -25,7 +26,7 @@ public class Field {
         }
     }
 
-    public enum Column {
+    public enum Column implements Factor {
         C1, C2, C3;
 
         private static final Random RANDOM = new Random();

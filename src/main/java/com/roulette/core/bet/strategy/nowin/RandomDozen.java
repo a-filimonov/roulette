@@ -4,7 +4,7 @@ import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.DozenBet;
 import com.roulette.core.field.Field;
 
-public class RandomDozen extends NoWinBetStrategy {
+public class RandomDozen extends NoWinBetStrategy<Field.Dozen> {
 
     public RandomDozen(long bet) {
         super(bet);

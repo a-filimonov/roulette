@@ -1,8 +1,8 @@
 package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.bool.EvenBet;
-import com.roulette.util.BooleanUtil;
+import com.roulette.core.bet.outisde.EvenBet;
+import com.roulette.util.Boolean;
 
 public class RandomOddEven extends NoWinBetStrategy<Boolean> {
 
@@ -17,6 +17,6 @@ public class RandomOddEven extends NoWinBetStrategy<Boolean> {
 
     @Override
     public Bet<Boolean> apply() {
-        return new EvenBet(bet, BooleanUtil.flipCoin());
+        return new EvenBet(bet, Boolean.random());
     }
 }

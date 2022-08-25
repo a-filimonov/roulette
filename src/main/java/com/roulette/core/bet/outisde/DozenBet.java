@@ -24,6 +24,14 @@ public class DozenBet extends Bet<Field.Dozen> {
         return 3;
     }
 
+    public Bet<Field.Dozen> add(long amount) {
+        return new DozenBet(bet + amount, factor);
+    }
+
+    public Bet<Field.Dozen> doubled() {
+        return new DozenBet(bet * 2, factor);
+    }
+
     @Override
     public String toString() {
         switch (factor) {

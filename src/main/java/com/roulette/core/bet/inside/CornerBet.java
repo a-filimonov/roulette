@@ -21,6 +21,14 @@ public class CornerBet extends Bet<Corner> {
         return 8;
     }
 
+    public Bet<Corner> add(long amount) {
+        return new CornerBet(bet + amount, factor);
+    }
+
+    public Bet<Corner> doubled() {
+        return new CornerBet(bet * 2, factor);
+    }
+
     @Override
     public String toString() {
         return String.format("Corner %s-%s", factor.getF1().getNumber(), factor.getF4().getNumber());

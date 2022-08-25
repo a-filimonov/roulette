@@ -22,6 +22,14 @@ public class StreetBet extends Bet<Street> {
         return 11;
     }
 
+    public Bet<Street> add(long amount) {
+        return new StreetBet(bet + amount, factor);
+    }
+
+    public Bet<Street> doubled() {
+        return new StreetBet(bet * 2, factor);
+    }
+
     @Override
     public String toString() {
         return String.format("Street %s-%s", factor.getF1().getNumber(), factor.getF3().getNumber());
