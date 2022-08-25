@@ -14,7 +14,7 @@ public class DoubleBetColorStrategy extends NoWinBetStrategy {
 
     @Override
     public String getName() {
-        return "[NEEDS A FIX] Doubles the bet every turn";
+        return "Doubles the bet every turn";
     }
 
     @Override

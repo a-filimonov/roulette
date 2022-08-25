@@ -1,6 +1,7 @@
 package com.roulette;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import com.roulette.core.bet.Bet;
@@ -15,12 +16,6 @@ import com.roulette.core.bet.outisde.DozenBet;
 import com.roulette.core.bet.outisde.EvenBet;
 import com.roulette.core.bet.outisde.HalfBet;
 import com.roulette.core.bet.strategy.BetStrategy;
-import com.roulette.core.bet.strategy.nowin.DoubleBetColorStrategy;
-import com.roulette.core.bet.strategy.win.DalembertStrategy;
-import com.roulette.core.bet.strategy.win.FibonacciStrategy;
-import com.roulette.core.bet.strategy.win.GrandMartingaleStrategy;
-import com.roulette.core.bet.strategy.win.JamesBondStrategy;
-import com.roulette.core.bet.strategy.win.MartingaleStrategy;
 import com.roulette.core.bet.strategy.nowin.RandomColor;
 import com.roulette.core.bet.strategy.nowin.RandomColumn;
 import com.roulette.core.bet.strategy.nowin.RandomCorner;
@@ -31,7 +26,6 @@ import com.roulette.core.bet.strategy.nowin.RandomLine;
 import com.roulette.core.bet.strategy.nowin.RandomOddEven;
 import com.roulette.core.bet.strategy.nowin.RandomSplit;
 import com.roulette.core.bet.strategy.nowin.RandomStreet;
-import com.roulette.core.bet.strategy.win.ReverseMartingaleStrategy;
 import com.roulette.core.field.Corner;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Field.Color;
@@ -47,6 +41,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import static com.roulette.BetStrategies.dalembert;
+import static com.roulette.BetStrategies.fibonacci;
+import static com.roulette.BetStrategies.doubleBetColor;
+import static com.roulette.BetStrategies.grandMartingale;
+import static com.roulette.BetStrategies.jamesBond;
+import static com.roulette.BetStrategies.martingale;
+import static com.roulette.BetStrategies.reverseMartingale;
 import static com.roulette.core.field.CornerRegistry.C_14_15_17_18;
 import static com.roulette.core.field.Field.Color.BLK;
 import static com.roulette.core.field.Field.Color.RED;
@@ -55,7 +56,8 @@ import static com.roulette.core.field.FieldRegistry.ZERO;
 import static com.roulette.core.field.LineRegistry.L_10_15;
 import static com.roulette.core.field.SplitRegistry.S_1_2;
 import static com.roulette.core.field.StreetRegistry.S_13_14_15;
-import static org.junit.jupiter.params.provider.Arguments.*;
+import static org.junit.jupiter.api.Named.named;
+import static org.junit.jupiter.params.provider.Arguments.of;
 
 class RouletteTest {
 
@@ -84,10 +86,18 @@ class RouletteTest {
     }
 
     @ParameterizedTest
-    @MethodSource(value = "betStrategyTestCases")
-    void shouldPlayRouletteWithGivenBetStrategy(BetStrategy betStrategy) {
+    @MethodSource(value = "randomBetTestCases")
+    void shouldPlayRouletteWithRandomBet(BetStrategy betStrategy) {
         for (int i = 0; i < ITERATIONS; i++) {
             play(roulette(betStrategy.getName()), betStrategy);
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource(value = "betStrategyTestCases")
+    void shouldPlayRouletteWithGivenBetStrategy(Supplier<BetStrategy> supplier) {
+        for (int i = 0; i < ITERATIONS; i++) {
+            play(roulette(supplier.get().getName()), supplier.get());
         }
     }
 
@@ -105,7 +115,7 @@ class RouletteTest {
             of(columnBet(Field.Column.C1)),
             of(columnBet(Field.Column.C2)),
             of(columnBet(Field.Column.C3)),
-            of(singleBet(ZERO)),
+            of(singleBet(ZERO)),    //TODO fix only one iteration
             of(singleBet(F_17)),
             of(splitBet(S_1_2)),
             of(streetBet(S_13_14_15)),
@@ -115,21 +125,35 @@ class RouletteTest {
     }
 
     private static Stream<Arguments> betStrategyTestCases() {
+        var bet = colorBet(RED);
+        var dalembert = dalembert(bet);
+        var martingale = martingale(bet);
+        var reverseMartingale = reverseMartingale(bet);
+        var grandMartingale = grandMartingale(bet);
+        var fibonacci = fibonacci(bet);
+        var jamesBond = jamesBond();
+        var doubleBetColor = doubleBetColor(bet);
+
         return Stream.of(
-            of(new MartingaleStrategy(colorBet(RED))),
-            of(new ReverseMartingaleStrategy(colorBet(RED))),
-            of(new GrandMartingaleStrategy(colorBet(RED))),
-            of(new DoubleBetColorStrategy(colorBet(RED))),    //TODO fix repeats of this strat
-            of(new DalembertStrategy(colorBet(RED))),
-            of(new FibonacciStrategy(colorBet(RED))),
-            of(new JamesBondStrategy()),
+            of(named(martingale.get().getName(), martingale)),
+            of(named(dalembert.get().getName(), dalembert)),
+            of(named(reverseMartingale.get().getName(), reverseMartingale)),
+            of(named(grandMartingale.get().getName(), grandMartingale)),
+            of(named(fibonacci.get().getName(), fibonacci)),
+            of(named(jamesBond.get().getName(), jamesBond)),
+            of(named(doubleBetColor.get().getName(), doubleBetColor))
+        );
+    }
+
+    private static Stream<Arguments> randomBetTestCases() {
+        return Stream.of(
             of(new RandomColor(BET)),
             of(new RandomOddEven(BET)),
             of(new RandomHalf(BET)),
             of(new RandomDozen(BET)),
             of(new RandomColumn(BET)),
             of(new RandomSplit(BET)),
-            of(new RandomField(BET)),
+            of(new RandomField(BET)),   //TODO fix only 4 iterations
             of(new RandomStreet(BET)),
             of(new RandomCorner(BET)),
             of(new RandomLine(BET))

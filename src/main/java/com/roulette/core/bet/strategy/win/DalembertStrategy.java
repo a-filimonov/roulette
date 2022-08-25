@@ -10,7 +10,7 @@ import com.roulette.core.bet.strategy.BetStrategy;
  */
 public class DalembertStrategy implements BetStrategy {
 
-    private ColorBet currentBet;
+    private ColorBet currentBet;    // TODO use even bet interface
 
     public DalembertStrategy(ColorBet bet) {
         this.currentBet = bet;
