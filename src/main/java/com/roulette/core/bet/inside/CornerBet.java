@@ -26,6 +26,6 @@ public class CornerBet extends Bet {
 
     @Override
     public String toString() {
-        return String.format("Corner %s:%s:%s:%s", corner.getF1().getNumber(), corner.getF2().getNumber(), corner.getF3().getNumber(), corner.getF4().getNumber());
+        return String.format("Corner %s-%s", corner.getF1().getNumber(), corner.getF4().getNumber());
     }
 }

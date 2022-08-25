@@ -75,7 +75,7 @@ public class Stats {
 
         @Override
         public String toString() {
-            return String.format("W%s/L%s(T%s), PROFIT %s(@%s), BET %.2f, PAYOUT %.2f%%", wins, loses, turns, profit(), profitTurn, avgBet(), payout());
+            return String.format("W%s/L%s(T%s) WinRate [%.2f] Profit [%s @ %s turn] Avg Bet [%.2f] Payout [%.2f%%]", wins, loses, turns, (float) wins/loses, profit(), profitTurn, avgBet(), payout());
         }
 
         @Override

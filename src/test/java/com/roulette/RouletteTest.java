@@ -19,6 +19,7 @@ import com.roulette.core.bet.strategy.nowin.DoubleBetColorStrategy;
 import com.roulette.core.bet.strategy.win.DalembertStrategy;
 import com.roulette.core.bet.strategy.win.FibonacciStrategy;
 import com.roulette.core.bet.strategy.win.GrandMartingaleStrategy;
+import com.roulette.core.bet.strategy.win.JamesBondStrategy;
 import com.roulette.core.bet.strategy.win.MartingaleStrategy;
 import com.roulette.core.bet.strategy.nowin.RandomColor;
 import com.roulette.core.bet.strategy.nowin.RandomColumn;
@@ -51,7 +52,7 @@ import static com.roulette.core.field.Field.Color.BLK;
 import static com.roulette.core.field.Field.Color.RED;
 import static com.roulette.core.field.FieldRegistry.F_17;
 import static com.roulette.core.field.FieldRegistry.ZERO;
-import static com.roulette.core.field.LineRegistry.L_4;
+import static com.roulette.core.field.LineRegistry.L_10_15;
 import static com.roulette.core.field.SplitRegistry.S_1_2;
 import static com.roulette.core.field.StreetRegistry.S_13_14_15;
 import static org.junit.jupiter.params.provider.Arguments.*;
@@ -109,7 +110,7 @@ class RouletteTest {
             of(splitBet(S_1_2)),
             of(streetBet(S_13_14_15)),
             of(cornerBet(C_14_15_17_18)),
-            of(lineBet(L_4))
+            of(lineBet(L_10_15))
         );
     }
 
@@ -121,6 +122,7 @@ class RouletteTest {
             of(new DoubleBetColorStrategy(colorBet(RED))),    //TODO fix repeats of this strat
             of(new DalembertStrategy(colorBet(RED))),
             of(new FibonacciStrategy(colorBet(RED))),
+            of(new JamesBondStrategy()),
             of(new RandomColor(BET)),
             of(new RandomOddEven(BET)),
             of(new RandomHalf(BET)),

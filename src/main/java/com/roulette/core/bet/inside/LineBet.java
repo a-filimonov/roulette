@@ -27,6 +27,6 @@ public class LineBet extends Bet {
 
     @Override
     public String toString() {
-        return String.format("Line %s:%s:%s:%s:%s:%s", line.getF1().getNumber(), line.getF2().getNumber(), line.getF3().getNumber(), line.getF4().getNumber(), line.getF5().getNumber(), line.getF6().getNumber());
+        return String.format("Line %s-%s", line.getF1().getNumber(), line.getF6().getNumber());
     }
 }
