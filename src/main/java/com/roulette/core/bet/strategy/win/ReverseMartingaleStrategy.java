@@ -8,7 +8,7 @@ import com.roulette.core.bet.strategy.BetStrategy;
  * User doubles the bet every time he wins
  * Returns to initial bet when lost
  */
-public class ReverseMartingaleStrategy implements BetStrategy {
+public class ReverseMartingaleStrategy implements BetStrategy<Boolean> {
 
     private final BooleanBet initialBet;
     private BooleanBet currentBet;
@@ -19,7 +19,7 @@ public class ReverseMartingaleStrategy implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
+    public Bet<Boolean> apply(Long win) {
         this.currentBet = win > 0 ? this.currentBet.doubled() : this.initialBet;
         return this.currentBet;
     }

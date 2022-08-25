@@ -8,7 +8,7 @@ import com.roulette.core.bet.strategy.BetStrategy;
  * User adds 1 to the bet stake every time he loses
  * User removes 1 from the bet stake every time he wins
  */
-public class DalembertStrategy implements BetStrategy {
+public class DalembertStrategy implements BetStrategy<Boolean> {
 
     private BooleanBet currentBet;
 
@@ -17,7 +17,7 @@ public class DalembertStrategy implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
+    public Bet<Boolean> apply(Long win) {
         this.currentBet = win == 0 ? this.currentBet.add(1) : this.currentBet.add(-1);
         return this.currentBet;
     }

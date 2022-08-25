@@ -4,20 +4,17 @@ import com.roulette.core.bet.Bet;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Street;
 
-public class StreetBet extends Bet {
-
-    private final Street street;
+public class StreetBet extends Bet<Street> {
 
     public StreetBet(long bet, Street street) {
-        super(bet);
-        this.street = street;
+        super(bet, street);
     }
 
     @Override
     protected boolean winCondition(Field field) {
-        return field.equals(street.getF1()) ||
-            field.equals(street.getF2()) ||
-            field.equals(street.getF3());
+        return field.equals(factor.getF1()) ||
+            field.equals(factor.getF2()) ||
+            field.equals(factor.getF3());
     }
 
     @Override
@@ -27,6 +24,6 @@ public class StreetBet extends Bet {
 
     @Override
     public String toString() {
-        return String.format("Street %s-%s", street.getF1().getNumber(), street.getF3().getNumber());
+        return String.format("Street %s-%s", factor.getF1().getNumber(), factor.getF3().getNumber());
     }
 }

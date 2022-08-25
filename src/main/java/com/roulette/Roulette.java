@@ -31,7 +31,7 @@ public class Roulette {
         this.wheel = new RouletteWheel(stats);
     }
 
-    public long play(List<Bet> bets) {
+    public long play(List<Bet<?>> bets) {
         var totalBet = bets.stream().mapToLong(Bet::getBet).sum();
         if (!user.isAbleToBet(totalBet)) {
             throw new EndGameException(user);
@@ -61,7 +61,7 @@ public class Roulette {
         return totalWin;
     }
 
-    public Long play(Bet... bets) {
+    public Long play(Bet<?>... bets) {
         return play(Arrays.asList(bets));
     }
 }

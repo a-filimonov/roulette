@@ -8,7 +8,7 @@ import com.roulette.core.bet.strategy.BetStrategy;
  * User adds 1, 2, 3, 5, 8, 13... numbers to the bet if he wins
  * User returns to initial bet when he loses
  */
-public class FibonacciStrategy implements BetStrategy {
+public class FibonacciStrategy implements BetStrategy<Boolean> {
 
     private final BooleanBet initialBet;
     private int lastFib;
@@ -23,7 +23,7 @@ public class FibonacciStrategy implements BetStrategy {
     }
 
     @Override
-    public Bet apply(Long win) {
+    public Bet<Boolean> apply(Long win) {
         if (win > 0) {
             int increase = this.lastFib + this.currentFib;
             this.currentBet = this.currentBet.add(increase);

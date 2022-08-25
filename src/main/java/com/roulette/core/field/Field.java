@@ -11,7 +11,7 @@ import static com.roulette.core.field.FieldRegistry.ZERO;
 public class Field {
 
     int number;
-    Boolean red;
+    Boolean red;    // null == ZERO
     Dozen dozen;
     Column column;
 

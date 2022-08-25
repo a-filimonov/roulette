@@ -15,19 +15,19 @@ public class HalfBet extends BooleanBet {
         if (field.isZero()) {
             return false;
         }
-        return (field.isFirstHalf() && state) || (!field.isFirstHalf() && !state);
+        return (field.isFirstHalf() && factor) || (!field.isFirstHalf() && !factor);
     }
 
     @Override
     public String toString() {
-        return state ? "1-18" : "19-36";
+        return factor ? "1-18" : "19-36";
     }
 
     public BooleanBet add(long amount) {
-        return new HalfBet(bet + amount, state);
+        return new HalfBet(bet + amount, factor);
     }
 
     public BooleanBet doubled() {
-        return new HalfBet(bet * 2, state);
+        return new HalfBet(bet * 2, factor);
     }
 }

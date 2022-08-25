@@ -4,18 +4,15 @@ import com.roulette.core.bet.Bet;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Split;
 
-public class SplitBet extends Bet {
-
-    private final Split split;
+public class SplitBet extends Bet<Split> {
 
     public SplitBet(long bet, Split split) {
-        super(bet);
-        this.split = split;
+        super(bet, split);
     }
 
     @Override
     protected boolean winCondition(Field field) {
-        return field.equals(split.getF1()) || field.equals(split.getF2());
+        return field.equals(factor.getF1()) || field.equals(factor.getF2());
     }
 
     @Override
@@ -25,6 +22,6 @@ public class SplitBet extends Bet {
 
     @Override
     public String toString() {
-        return String.format("Split %s:%s", split.getF1().getNumber(), split.getF2().getNumber());
+        return String.format("Split %s:%s", factor.getF1().getNumber(), factor.getF2().getNumber());
     }
 }

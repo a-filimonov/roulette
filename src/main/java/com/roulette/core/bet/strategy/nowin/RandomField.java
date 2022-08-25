@@ -1,7 +1,7 @@
 package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.inside.SingleBet;
+import com.roulette.core.bet.inside.FieldBet;
 import com.roulette.core.field.FieldRegistry;
 
 public class RandomField extends NoWinBetStrategy {
@@ -17,6 +17,6 @@ public class RandomField extends NoWinBetStrategy {
 
     @Override
     public Bet apply() {
-        return new SingleBet(bet, FieldRegistry.random());
+        return new FieldBet(bet, FieldRegistry.random());
     }
 }

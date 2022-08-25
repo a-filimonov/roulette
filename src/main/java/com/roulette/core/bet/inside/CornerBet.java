@@ -4,19 +4,16 @@ import com.roulette.core.bet.Bet;
 import com.roulette.core.field.Corner;
 import com.roulette.core.field.Field;
 
-public class CornerBet extends Bet {
-
-    private final Corner corner;
+public class CornerBet extends Bet<Corner> {
 
     public CornerBet(long bet, Corner corner) {
-        super(bet);
-        this.corner = corner;
+        super(bet, corner);
     }
 
     @Override
     protected boolean winCondition(Field field) {
-        return field.equals(corner.getF1()) || field.equals(corner.getF2()) ||
-            field.equals(corner.getF3()) || field.equals(corner.getF4());
+        return field.equals(factor.getF1()) || field.equals(factor.getF2()) ||
+            field.equals(factor.getF3()) || field.equals(factor.getF4());
     }
 
     @Override
@@ -26,6 +23,6 @@ public class CornerBet extends Bet {
 
     @Override
     public String toString() {
-        return String.format("Corner %s-%s", corner.getF1().getNumber(), corner.getF4().getNumber());
+        return String.format("Corner %s-%s", factor.getF1().getNumber(), factor.getF4().getNumber());
     }
 }

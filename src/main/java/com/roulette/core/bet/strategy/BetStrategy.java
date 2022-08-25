@@ -7,7 +7,6 @@ import com.roulette.core.bet.Bet;
 /**
  * Bet function that calculates next bet based on previous turn win amount
  */
-public interface BetStrategy extends Function<Long, Bet> {
+public interface BetStrategy<T> extends Function<Long, Bet<T>> {
     String getName();
-    Bet apply(Long win);
 }

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.inside.CornerBet;
 import com.roulette.core.bet.inside.LineBet;
-import com.roulette.core.bet.inside.SingleBet;
+import com.roulette.core.bet.inside.FieldBet;
 import com.roulette.core.bet.inside.SplitBet;
 import com.roulette.core.bet.inside.StreetBet;
 import com.roulette.core.bet.outisde.bool.ColorBet;
@@ -77,7 +77,7 @@ class RouletteTest {
 
     @ParameterizedTest
     @MethodSource(value = "betTestCases")
-    void shouldPlayRouletteWithGivenBet(Bet bet) {
+    void shouldPlayRouletteWithGivenBet(Bet<?> bet) {
         for (int i = 0; i < ITERATIONS; i++) {
             play(roulette("All bets on " + bet.toString()), bet);
         }
@@ -85,7 +85,7 @@ class RouletteTest {
 
     @ParameterizedTest
     @MethodSource(value = "randomBetTestCases")
-    void shouldPlayRouletteWithRandomBet(BetStrategy betStrategy) {
+    void shouldPlayRouletteWithRandomBet(BetStrategy<?> betStrategy) {
         for (int i = 0; i < ITERATIONS; i++) {
             play(roulette(betStrategy.getName()), betStrategy);
         }
@@ -93,7 +93,7 @@ class RouletteTest {
 
     @ParameterizedTest
     @MethodSource(value = "betStrategyTestCases")
-    void shouldPlayRouletteWithGivenBetStrategy(Supplier<BetStrategy> supplier) {
+    void shouldPlayRouletteWithGivenBetStrategy(Supplier<BetStrategy<?>> supplier) {
         for (int i = 0; i < ITERATIONS; i++) {
             play(roulette(supplier.get().getName()), supplier.get());
         }
@@ -158,7 +158,7 @@ class RouletteTest {
         );
     }
 
-    private static void play(Roulette roulette, Bet bet) {
+    private static void play(Roulette roulette, Bet<?> bet) {
         try {
             while (true) {
                 roulette.play(List.of(bet));
@@ -168,7 +168,7 @@ class RouletteTest {
         }
     }
 
-    private static void play(Roulette roulette, BetStrategy betStrategy) {
+    private static void play(Roulette roulette, BetStrategy<?> betStrategy) {
         try {
             Long win = roulette.play(betStrategy.apply(10L));
             while (true) {
@@ -198,31 +198,31 @@ class RouletteTest {
         return new HalfBet(BET, firstHalf);
     }
 
-    private static Bet dozenBet(Field.Dozen dozen) {
+    private static Bet<Field.Dozen> dozenBet(Field.Dozen dozen) {
         return new DozenBet(BET, dozen);
     }
 
-    private static Bet columnBet(Field.Column column) {
+    private static Bet<Field.Column> columnBet(Field.Column column) {
         return new ColumnBet(BET, column);
     }
 
-    private static Bet singleBet(Field field) {
-        return new SingleBet(BET, field);
+    private static Bet<Field> singleBet(Field field) {
+        return new FieldBet(BET, field);
     }
 
-    private static Bet splitBet(Split split) {
+    private static Bet<Split> splitBet(Split split) {
         return new SplitBet(BET, split);
     }
 
-    private static Bet streetBet(Street street) {
+    private static Bet<Street> streetBet(Street street) {
         return new StreetBet(BET, street);
     }
 
-    private static Bet cornerBet(Corner corner) {
+    private static Bet<Corner> cornerBet(Corner corner) {
         return new CornerBet(BET, corner);
     }
 
-    private static Bet lineBet(Line line) {
+    private static Bet<Line> lineBet(Line line) {
         return new LineBet(BET, line);
     }
 }

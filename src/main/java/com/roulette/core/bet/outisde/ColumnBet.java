@@ -5,13 +5,10 @@ import com.roulette.core.field.Field;
 import lombok.Getter;
 
 @Getter
-public class ColumnBet extends Bet {
-
-    private final Field.Column column;
+public class ColumnBet extends Bet<Field.Column> {
 
     public ColumnBet(long bet, Field.Column column) {
-        super(bet);
-        this.column = column;
+        super(bet, column);
     }
 
     @Override
@@ -19,7 +16,7 @@ public class ColumnBet extends Bet {
         if (field.isZero()) {
             return false;
         }
-        return field.getColumn() == column;
+        return field.getColumn() == factor;
     }
 
     @Override
@@ -29,7 +26,7 @@ public class ColumnBet extends Bet {
 
     @Override
     public String toString() {
-        switch (column) {
+        switch (factor) {
             case C1:
                 return "Column 1-34";
             case C2:

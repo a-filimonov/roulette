@@ -15,21 +15,21 @@ public class ColorBet extends BooleanBet {
         if (field.isZero()) {
             return false;
         }
-        return field.getRed() == state;
+        return field.getRed() == factor;
     }
 
     @Override
     public String toString() {
-        return state ? "RED" : "BLK";
+        return factor ? "RED" : "BLK";
     }
 
     @Override
     public BooleanBet add(long amount) {
-        return new ColorBet(bet + amount, state);
+        return new ColorBet(bet + amount, factor);
     }
 
     @Override
     public BooleanBet doubled() {
-        return new ColorBet(bet * 2, state);
+        return new ColorBet(bet * 2, factor);
     }
 }

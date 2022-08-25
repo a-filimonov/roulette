@@ -5,13 +5,10 @@ import com.roulette.core.field.Field;
 import lombok.Getter;
 
 @Getter
-public class DozenBet extends Bet {
-
-    private final Field.Dozen dozen;
+public class DozenBet extends Bet<Field.Dozen> {
 
     public DozenBet(long bet, Field.Dozen dozen) {
-        super(bet);
-        this.dozen = dozen;
+        super(bet, dozen);
     }
 
     @Override
@@ -19,7 +16,7 @@ public class DozenBet extends Bet {
         if (field.isZero()) {
             return false;
         }
-        return field.getDozen() == dozen;
+        return field.getDozen() == factor;
     }
 
     @Override
@@ -29,7 +26,7 @@ public class DozenBet extends Bet {
 
     @Override
     public String toString() {
-        switch (dozen) {
+        switch (factor) {
             case D1:
                 return "1-12";
             case D2:

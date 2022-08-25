@@ -4,7 +4,7 @@ import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.ColumnBet;
 import com.roulette.core.field.Field;
 
-public class RandomColumn extends NoWinBetStrategy {
+public class RandomColumn extends NoWinBetStrategy<Field.Column> {
 
     public RandomColumn(long bet) {
         super(bet);
@@ -16,7 +16,7 @@ public class RandomColumn extends NoWinBetStrategy {
     }
 
     @Override
-    public Bet apply() {
+    public Bet<Field.Column> apply() {
         return new ColumnBet(bet, Field.Column.random());
     }
 }

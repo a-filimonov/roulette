@@ -2,7 +2,7 @@ package com.roulette.core.bet.strategy.win;
 
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.inside.LineBet;
-import com.roulette.core.bet.inside.SingleBet;
+import com.roulette.core.bet.inside.FieldBet;
 import com.roulette.core.bet.outisde.bool.HalfBet;
 import com.roulette.core.bet.strategy.nowin.NoWinBetStrategy;
 
@@ -18,9 +18,9 @@ public class JamesBondStrategy extends NoWinBetStrategy {
 
     private static final Bet FIRST_BET = new HalfBet(140, false);
     private static final Bet SECOND_BET = new LineBet(50, L_13_18);
-    private static final Bet THIRD_BET = new SingleBet(10, ZERO);
+    private static final Bet THIRD_BET = new FieldBet(10, ZERO);
 
-    private Bet nextBet;
+    private Bet<Object> nextBet;
 
     public JamesBondStrategy() {
         super(FIRST_BET.getBet());
@@ -34,7 +34,7 @@ public class JamesBondStrategy extends NoWinBetStrategy {
         return bet;
     }
 
-    private Bet switchBet() {
+    private Bet<Object> switchBet() {
         return this.nextBet.equals(FIRST_BET) ? SECOND_BET : this.nextBet.equals(SECOND_BET) ? THIRD_BET : FIRST_BET;
     }
 

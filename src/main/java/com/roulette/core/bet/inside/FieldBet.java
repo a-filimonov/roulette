@@ -5,18 +5,15 @@ import com.roulette.core.bet.Bet;
 import lombok.Getter;
 
 @Getter
-public class SingleBet extends Bet {
+public class FieldBet extends Bet<Field> {
 
-    private final Field field;
-
-    public SingleBet(long bet, Field field) {
-        super(bet);
-        this.field = field;
+    public FieldBet(long bet, Field field) {
+        super(bet, field);
     }
 
     @Override
     protected boolean winCondition(Field field) {
-        return field.equals(this.field);
+        return field.equals(this.factor);
     }
 
     @Override
@@ -26,6 +23,6 @@ public class SingleBet extends Bet {
 
     @Override
     public String toString() {
-        return field.toString();
+        return factor.toString();
     }
 }

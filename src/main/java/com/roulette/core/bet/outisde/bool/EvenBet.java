@@ -15,19 +15,19 @@ public class EvenBet extends BooleanBet {
         if (field.isZero()) {
             return false;
         }
-        return (field.isEven() && state) || (!field.isEven() && !state);
+        return (field.isEven() && factor) || (!field.isEven() && !factor);
     }
 
     @Override
     public String toString() {
-        return state ? "EVEN" : "ODD";
+        return factor ? "EVEN" : "ODD";
     }
 
     public BooleanBet add(long amount) {
-        return new EvenBet(bet + amount, state);
+        return new EvenBet(bet + amount, factor);
     }
 
     public BooleanBet doubled() {
-        return new EvenBet(bet * 2, state);
+        return new EvenBet(bet * 2, factor);
     }
 }

@@ -16,7 +16,7 @@ public class RandomDozen extends NoWinBetStrategy {
     }
 
     @Override
-    public Bet apply() {
+    public Bet<Field.Dozen> apply() {
         return new DozenBet(bet, Field.Dozen.random());
     }
 }

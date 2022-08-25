@@ -2,13 +2,10 @@ package com.roulette.core.bet.outisde.bool;
 
 import com.roulette.core.bet.Bet;
 
-public abstract class BooleanBet extends Bet {
+public abstract class BooleanBet extends Bet<Boolean> {
 
-    protected final boolean state;
-
-    public BooleanBet(long bet, boolean state) {
-        super(bet);
-        this.state = state;
+    public BooleanBet(long bet, boolean factor) {
+        super(bet, factor);
     }
 
     @Override

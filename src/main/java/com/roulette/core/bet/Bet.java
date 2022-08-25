@@ -6,11 +6,12 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-//TODO parametrize bet (color, dozen etc)
-public abstract class Bet {
+public abstract class Bet<F> {
     private static final long NO_WIN = 0L;
 
     protected final long bet;
+
+    protected final F factor;
 
     public long pay(Field field) {
         return winCondition(field) ? bet * multiplier() : NO_WIN;

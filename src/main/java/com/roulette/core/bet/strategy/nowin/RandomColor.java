@@ -4,7 +4,7 @@ import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.bool.ColorBet;
 import com.roulette.util.BooleanUtil;
 
-public class RandomColor extends NoWinBetStrategy {
+public class RandomColor extends NoWinBetStrategy<Boolean> {
 
     public RandomColor(long bet) {
         super(bet);
@@ -16,7 +16,7 @@ public class RandomColor extends NoWinBetStrategy {
     }
 
     @Override
-    public Bet apply() {
+    public Bet<Boolean> apply() {
         return new ColorBet(bet, BooleanUtil.flipCoin());
     }
 }
