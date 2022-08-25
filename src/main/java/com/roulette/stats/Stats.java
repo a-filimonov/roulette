@@ -2,16 +2,15 @@ package com.roulette.stats;
 
 import com.roulette.Roulette;
 import com.roulette.core.user.User;
-import com.roulette.util.MultiMap;
+import com.roulette.util.SortedMultiMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 public class Stats {
 
-    //TODO sort stats by profitability
-    private static final MultiMap<User, RouletteStats> ROULETTE_STATS = new MultiMap<>();
+    private static final SortedMultiMap<User, RouletteStats> ROULETTE_STATS = new SortedMultiMap<>();
 
-    public MultiMap<User, RouletteStats> getAll() {
+    public SortedMultiMap<User, RouletteStats> getAll() {
         return ROULETTE_STATS;
     }
 
@@ -21,7 +20,7 @@ public class Stats {
 
     @Getter
     @NoArgsConstructor
-    public static class RouletteStats {
+    public static class RouletteStats implements Comparable<RouletteStats> {
         private int turns;
         private int wins;
         private int loses;
@@ -60,6 +59,9 @@ public class Stats {
         }
 
         public double payout() {
+            if (totalBet == 0) {
+                return 0;
+            }
             return totalWin * 100d / totalBet;
         }
 
@@ -73,7 +75,12 @@ public class Stats {
 
         @Override
         public String toString() {
-            return String.format("Stats: W%s/L%s(T%s), PROFIT %s(@%s), BET %.2f, PAYOUT %.2f%%", wins, loses, turns, profit(), profitTurn, avgBet(), payout());
+            return String.format("W%s/L%s(T%s), PROFIT %s(@%s), BET %.2f, PAYOUT %.2f%%", wins, loses, turns, profit(), profitTurn, avgBet(), payout());
+        }
+
+        @Override
+        public int compareTo(RouletteStats otherStats) {
+            return (int) this.payout() - (int) otherStats.payout();
         }
     }
 }

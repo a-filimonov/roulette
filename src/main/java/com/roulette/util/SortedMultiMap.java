@@ -1,21 +1,24 @@
 package com.roulette.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
-public class MultiMap<K, V> {
+import com.roulette.core.user.User;
+import com.roulette.stats.Stats;
 
-    private final Map<K, List<V>> map = new HashMap<>();
+public class SortedMultiMap<K extends User, V extends Stats.RouletteStats> {
+
+    private final Map<K, SortedSet<V>> map = new HashMap<>();
 
     /**
      * Add the specified value with the specified key in this multimap.
      */
     public void add(K key, V value) {
-        map.computeIfAbsent(key, k -> new ArrayList<>());
+        map.computeIfAbsent(key, k -> new TreeSet<>());
 
         map.get(key).add(value);
     }
@@ -25,19 +28,15 @@ public class MultiMap<K, V> {
      * already associated with a value
      */
     public void addIfAbsent(K key, V value) {
-        map.computeIfAbsent(key, k -> new ArrayList<>());
-
-        // if the value is absent, insert it
-        if (!map.get(key).contains(value)) {
-            map.get(key).add(value);
-        }
+        map.computeIfAbsent(key, k -> new TreeSet<>());
+        map.get(key).add(value);
     }
 
     /**
      * Returns the Collection of values to which the specified key is mapped,
      * or null if this multimap contains no mapping for the key.
      */
-    public List<V> get(Object key) {
+    public SortedSet<V> get(Object key) {
         return map.get(key);
     }
 
@@ -51,7 +50,7 @@ public class MultiMap<K, V> {
     /**
      * Returns a set view of the mappings contained in this multimap.
      */
-    public Set<Map.Entry<K, List<V>>> entrySet() {
+    public Set<Map.Entry<K, SortedSet<V>>> entrySet() {
         return map.entrySet();
     }
 
@@ -59,7 +58,7 @@ public class MultiMap<K, V> {
      * Returns a Collection view of Collection of the values present in
      * this multimap.
      */
-    public Collection<List<V>> values() {
+    public Collection<SortedSet<V>> values() {
         return map.values();
     }
 

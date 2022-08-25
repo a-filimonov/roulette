@@ -1,6 +1,7 @@
 package com.roulette;
 
 import java.util.List;
+import java.util.SortedSet;
 import java.util.stream.Stream;
 
 import com.roulette.core.bet.Bet;
@@ -61,7 +62,8 @@ class RouletteTest {
         STATS.getAll().entrySet().forEach(e -> {
             String name = e.getKey().getName();
             System.out.printf("Roulette [%s]:\n", name);
-            e.getValue().forEach(stat -> System.out.printf("\t%s\n", stat));
+            e.getValue().stream().sorted((rs1, rs2) -> (int) (rs2.payout() - rs1.payout()))
+                .forEach(stat -> System.out.printf("\tStats: %s\n", stat));
         });
     }
 
