@@ -31,11 +31,11 @@ abstract class BaseRouletteTest {
 
     protected static final long BET = 15;
     protected static final int ITERATIONS = 10; // how many games each user plays specified strategy
-    private static final int LIMIT = 3; // game results are sorted by payout, show only top 3 in the end
+    private static final int LIMIT = 10; // game results are sorted by payout, show only top N in the end
 
-    private static final long BALANCE = 1000;
+    protected static final long BALANCE = 1000;
     private static final boolean DEBUG = false;
-    private static final Stats STATS = new Stats();
+    protected static final Stats STATS = new Stats();
 
     @AfterAll
     static void end() {
@@ -46,16 +46,6 @@ abstract class BaseRouletteTest {
                 .limit(LIMIT)
                 .forEach(stat -> System.out.printf("\tStats: %s\n", stat));
         });
-    }
-
-    protected static void play(Roulette roulette, Bet<Factor> bet) {
-        try {
-            while (true) {
-                roulette.play(List.of(bet));
-            }
-        } catch (EndGameException e) {
-            // stop roulette
-        }
     }
 
     protected static void play(Roulette roulette, BetStrategy<Factor> betStrategy) {
@@ -69,11 +59,8 @@ abstract class BaseRouletteTest {
         }
     }
 
-    protected static Roulette roulette(String name) {
-        User user = new User(name, BALANCE);
-        Roulette roulette = new Roulette(user, new Log(DEBUG));
-        STATS.register(user, roulette);
-        return roulette;
+    protected static Roulette roulette(User user) {
+        return new Roulette(user, new Log(DEBUG));
     }
 
     protected static Bet<Boolean> colorBet(Boolean isRed) {

@@ -10,7 +10,7 @@ import java.util.TreeSet;
 import com.roulette.core.user.User;
 import com.roulette.stats.Stats;
 
-public class SortedMultiMap<K extends User, V extends Stats.RouletteStats> {
+public class SortedMultiMap<K, V extends Stats.RouletteStats> {
 
     private final Map<K, SortedSet<V>> map = new HashMap<>();
 

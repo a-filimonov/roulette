@@ -13,6 +13,7 @@ import com.roulette.core.bet.strategy.win.GrandMartingaleStrategy;
 import com.roulette.core.bet.strategy.win.JamesBondStrategy;
 import com.roulette.core.bet.strategy.win.MartingaleStrategy;
 import com.roulette.core.bet.strategy.win.ReverseMartingaleStrategy;
+import com.roulette.core.user.User;
 import com.roulette.util.Boolean;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,14 +25,17 @@ import static org.junit.jupiter.params.provider.Arguments.of;
 public class BetStrategyRouletteTest extends BaseRouletteTest {
 
     @ParameterizedTest
-    @MethodSource(value = "betStrategyTestCases")
+    @MethodSource
     void shouldPlayRouletteWithGivenBetStrategy(Supplier<BetStrategy<Factor>> supplier) {
         for (int i = 0; i < ITERATIONS; i++) {
-            play(roulette(supplier.get().getName()), supplier.get());
+            User user = new User(supplier.get().getName(), BALANCE);
+            Roulette roulette = roulette(user);
+            play(roulette, supplier.get());
+            STATS.register(user, roulette);
         }
     }
 
-    private static Stream<Arguments> betStrategyTestCases() {
+    private static Stream<Arguments> shouldPlayRouletteWithGivenBetStrategy() {
         var bet = colorBet(Boolean.TRUE);
         var dalembert = dalembert(bet);
         var martingale = martingale(bet);
@@ -45,7 +49,7 @@ public class BetStrategyRouletteTest extends BaseRouletteTest {
             of(named(martingale.get().getName(), martingale)),
             of(named(dalembert.get().getName(), dalembert)),
             of(named(reverseMartingale.get().getName(), reverseMartingale)),
-            of(named(grandMartingale.get().getName(), grandMartingale)),    //TODO fix 4 iterations
+            of(named(grandMartingale.get().getName(), grandMartingale)),
             of(named(fibonacci.get().getName(), fibonacci)),
             of(named(jamesBond.get().getName(), jamesBond)),
             of(named(doubleBetColor.get().getName(), doubleBetColor))

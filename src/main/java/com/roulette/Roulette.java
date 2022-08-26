@@ -27,7 +27,7 @@ public class Roulette {
         this.id = UUID.randomUUID().toString();
         this.user = user;
         this.log = log;
-        this.stats = new Stats.RouletteStats(user.getBalance());
+        this.stats = new Stats.RouletteStats(this.id, user.getBalance());
         this.wheel = new RouletteWheel(stats);
     }
 

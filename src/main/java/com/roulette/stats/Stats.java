@@ -3,6 +3,7 @@ package com.roulette.stats;
 import com.roulette.Roulette;
 import com.roulette.core.user.User;
 import com.roulette.util.SortedMultiMap;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,12 +16,15 @@ public class Stats {
     }
 
     public void register(User user, Roulette roulette) {
+        //TODO 0-stats are preventing from further adds
         ROULETTE_STATS.add(user, roulette.getStats());
     }
 
     @Getter
     @NoArgsConstructor
+    @EqualsAndHashCode(of = "id")
     public static class RouletteStats implements Comparable<RouletteStats> {
+        private String id;
         private int turns;
         private int wins;
         private int loses;
@@ -30,8 +34,10 @@ public class Stats {
         private long maxBalance;
         private int profitTurn;
 
-        public RouletteStats(long initBalance) {
+        public RouletteStats(String id, long initBalance) {
+            this.id = id;
             this.initBalance = initBalance;
+            this.maxBalance = initBalance;
         }
 
         public void addTurn() {
@@ -73,9 +79,16 @@ public class Stats {
             return maxBalance - initBalance;
         }
 
+        private float winRate() {
+            if (loses == 0) {
+                return 0;
+            }
+            return (float) wins / loses;
+        }
+
         @Override
         public String toString() {
-            return String.format("W%s/L%s(T%s) WinRate [%.2f] Profit [%s @ %s turn] Avg Bet [%.2f] Payout [%.2f%%]", wins, loses, turns, (float) wins/loses, profit(), profitTurn, avgBet(), payout());
+            return String.format("W%s/L%s(T%s) WinRate [%.2f] Profit [%s @ %s turn] Avg Bet [%.2f] Payout [%.2f%%]", wins, loses, turns, winRate(), profit(), profitTurn, avgBet(), payout());
         }
 
         @Override
