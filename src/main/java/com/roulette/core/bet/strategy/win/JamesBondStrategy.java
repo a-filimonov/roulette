@@ -6,6 +6,8 @@ import com.roulette.core.bet.inside.LineBet;
 import com.roulette.core.bet.inside.FieldBet;
 import com.roulette.core.bet.outisde.HalfBet;
 import com.roulette.core.bet.strategy.nowin.NoWinBetStrategy;
+import com.roulette.core.field.Field;
+import com.roulette.core.field.Line;
 import com.roulette.util.Boolean;
 
 import static com.roulette.core.field.FieldRegistry.ZERO;
@@ -18,11 +20,11 @@ import static com.roulette.core.field.LineRegistry.L_13_18;
  */
 public class JamesBondStrategy extends NoWinBetStrategy<Factor> {
 
-    private static final Bet FIRST_BET = new HalfBet(140, Boolean.FALSE);
-    private static final Bet SECOND_BET = new LineBet(50, L_13_18);
-    private static final Bet THIRD_BET = new FieldBet(10, ZERO);
+    private static final Bet<Boolean> FIRST_BET = new HalfBet(140, Boolean.FALSE);
+    private static final Bet<Line> SECOND_BET = new LineBet(50, L_13_18);
+    private static final Bet<Field> THIRD_BET = new FieldBet(10, ZERO);
 
-    private Bet<Factor> nextBet;
+    private Bet<?> nextBet;
 
     public JamesBondStrategy() {
         super(FIRST_BET.getBet());
@@ -30,13 +32,13 @@ public class JamesBondStrategy extends NoWinBetStrategy<Factor> {
     }
 
     @Override
-    public Bet<Factor> apply() {
+    public Bet apply() {
         var bet = this.nextBet;
         this.nextBet = switchBet();
         return bet;
     }
 
-    private Bet<Factor> switchBet() {
+    private Bet<?> switchBet() {
         return this.nextBet.equals(FIRST_BET) ? SECOND_BET : this.nextBet.equals(SECOND_BET) ? THIRD_BET : FIRST_BET;
     }
 
