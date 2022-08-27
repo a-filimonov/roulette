@@ -26,7 +26,7 @@ public class ReverseMartingaleStrategy implements BetStrategy<Boolean> {
 
     @Override
     public String getName() {
-        return "Reverse Martingale strategy";
+        return "Reverse Martingale";
     }
 
     @Override

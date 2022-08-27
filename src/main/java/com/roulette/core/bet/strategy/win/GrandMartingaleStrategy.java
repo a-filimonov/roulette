@@ -26,7 +26,7 @@ public class GrandMartingaleStrategy implements BetStrategy<Boolean> {
 
     @Override
     public String getName() {
-        return "Grand Martingale strategy";
+        return "Grand Martingale";
     }
 
     @Override

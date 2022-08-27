@@ -44,7 +44,7 @@ public class JamesBondStrategy extends NoWinBetStrategy<Factor> {
 
     @Override
     public String getName() {
-        return "James Bond strategy";
+        return "James Bond";
     }
 
     @Override

@@ -24,7 +24,7 @@ public class DalembertStrategy implements BetStrategy<Boolean> {
 
     @Override
     public String getName() {
-        return "D'Alembert strategy";
+        return "D'Alembert";
     }
 
     @Override

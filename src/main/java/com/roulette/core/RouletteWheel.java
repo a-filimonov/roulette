@@ -4,9 +4,44 @@ import java.util.List;
 import java.util.Random;
 
 import com.roulette.core.field.Field;
-import com.roulette.stats.Stats;
 
-import static com.roulette.core.field.FieldRegistry.*;
+import static com.roulette.core.field.FieldRegistry.F_1;
+import static com.roulette.core.field.FieldRegistry.F_10;
+import static com.roulette.core.field.FieldRegistry.F_11;
+import static com.roulette.core.field.FieldRegistry.F_12;
+import static com.roulette.core.field.FieldRegistry.F_13;
+import static com.roulette.core.field.FieldRegistry.F_14;
+import static com.roulette.core.field.FieldRegistry.F_15;
+import static com.roulette.core.field.FieldRegistry.F_16;
+import static com.roulette.core.field.FieldRegistry.F_17;
+import static com.roulette.core.field.FieldRegistry.F_18;
+import static com.roulette.core.field.FieldRegistry.F_19;
+import static com.roulette.core.field.FieldRegistry.F_2;
+import static com.roulette.core.field.FieldRegistry.F_20;
+import static com.roulette.core.field.FieldRegistry.F_21;
+import static com.roulette.core.field.FieldRegistry.F_22;
+import static com.roulette.core.field.FieldRegistry.F_23;
+import static com.roulette.core.field.FieldRegistry.F_24;
+import static com.roulette.core.field.FieldRegistry.F_25;
+import static com.roulette.core.field.FieldRegistry.F_26;
+import static com.roulette.core.field.FieldRegistry.F_27;
+import static com.roulette.core.field.FieldRegistry.F_28;
+import static com.roulette.core.field.FieldRegistry.F_29;
+import static com.roulette.core.field.FieldRegistry.F_3;
+import static com.roulette.core.field.FieldRegistry.F_30;
+import static com.roulette.core.field.FieldRegistry.F_31;
+import static com.roulette.core.field.FieldRegistry.F_32;
+import static com.roulette.core.field.FieldRegistry.F_33;
+import static com.roulette.core.field.FieldRegistry.F_34;
+import static com.roulette.core.field.FieldRegistry.F_35;
+import static com.roulette.core.field.FieldRegistry.F_36;
+import static com.roulette.core.field.FieldRegistry.F_4;
+import static com.roulette.core.field.FieldRegistry.F_5;
+import static com.roulette.core.field.FieldRegistry.F_6;
+import static com.roulette.core.field.FieldRegistry.F_7;
+import static com.roulette.core.field.FieldRegistry.F_8;
+import static com.roulette.core.field.FieldRegistry.F_9;
+import static com.roulette.core.field.FieldRegistry.ZERO;
 
 public class RouletteWheel {
 
@@ -51,14 +86,7 @@ public class RouletteWheel {
         F_26
     );
 
-    private final Stats.RouletteStats stats;
-
-    public RouletteWheel(Stats.RouletteStats stats) {
-        this.stats = stats;
-    }
-
     public Field turn() {
-        stats.addTurn();
         return REEL.get(RANDOM.nextInt(REEL.size()));
     }
 }

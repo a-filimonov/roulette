@@ -7,10 +7,9 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.roulette.core.user.User;
-import com.roulette.stats.Stats;
+import com.roulette.stats.UserStats;
 
-public class SortedMultiMap<K, V extends Stats.RouletteStats> {
+public class SortedMultiMap<K, V extends UserStats> {
 
     private final Map<K, SortedSet<V>> map = new HashMap<>();
 

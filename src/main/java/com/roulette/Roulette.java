@@ -1,67 +1,79 @@
 package com.roulette;
 
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
 
+import com.roulette.core.RouletteWheel;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.field.Field;
-import com.roulette.core.RouletteWheel;
 import com.roulette.core.user.User;
-import com.roulette.exception.EndGameException;
 import com.roulette.log.Log;
-import com.roulette.stats.Stats;
+import com.roulette.stats.UserStats;
 import lombok.Getter;
+
+import static java.util.stream.Collectors.toMap;
 
 public class Roulette {
 
     @Getter
     private final String id;
-    private final User user;
+    private final List<User> users;
+    private final Map<User, UserStats> userStats;
     private final Log log;
-    @Getter
-    private final Stats.RouletteStats stats;
     private final RouletteWheel wheel;
 
-    public Roulette(User user, Log log) {
+    public Roulette(List<User> users, Log log) {
         this.id = UUID.randomUUID().toString();
-        this.user = user;
+        this.users = users;
         this.log = log;
-        this.stats = new Stats.RouletteStats(this.id, user.getBalance());
-        this.wheel = new RouletteWheel(stats);
+        this.wheel = new RouletteWheel();
+        this.userStats = users.stream().collect(toMap(Function.identity(), UserStats::new));
     }
 
-    public long play(List<Bet<?>> bets) {
-        var totalBet = bets.stream().mapToLong(Bet::getBet).sum();
-        if (!user.isAbleToBet(totalBet)) {
-            throw new EndGameException(user);
+    public Collection<UserStats> play() {
+        while (users.stream().anyMatch(User::hasMoney)) {
+            play(users);
         }
 
+        return userStats.values();
+    }
+
+    private void play(List<User> users) {
+        var userBets = users.stream()
+            .collect(toMap(Function.identity(), user -> user.getStrategy().apply(user.getLastWin())));
+
         Field field = wheel.turn();
-        log.debug("%s :: ", stats.getTurns());
+        log.debugln("Turn :: [%s]", field);
 
-        user.bet(totalBet);
-        stats.addBet(totalBet);
-        bets.forEach(bet -> log.debug("[%s] bets %s on %s :: [%s] :: ", user.getName(), totalBet, bet, field));
+        userBets.keySet().forEach(user -> play(userBets.get(user), field, user));
+    }
 
-        long totalWin = bets.stream().mapToLong(bet -> bet.pay(field)).sum();
+    private void play(Bet<?> bet, Field field, User user) {
+        var stats = userStats.get(user);
+        if (!user.hasMoney()) {
+            return;
+        }
 
-        if (totalWin > 0) {
-            long balance = user.win(totalWin);
-            stats.addWin(totalWin);
+        user.bet(bet.getBet());
+        stats.addBet(bet.getBet());
+        log.debug(" :: %s's bet was [%s on %s] :: ", user.getName(), bet.getBet(), bet);
+
+        long win = bet.pay(field);
+
+        if (win > 0) {
+            long balance = user.win(win);
+            stats.addWin(win);
             stats.updateMaxBalance(balance);
-            log.debug("WON %s !!! ", totalWin);
+            log.debug("WON %s !!! ", win);
         } else {
             stats.lost();
-            log.debug("Lost %s. ", totalBet);
+            log.debug("Lost %s. ", bet.getBet());
         }
 
         log.debugln("Balance: %s", user.getBalance());
-
-        return totalWin;
-    }
-
-    public Long play(Bet<?>... bets) {
-        return play(Arrays.asList(bets));
+        user.setLastWin(win);
     }
 }

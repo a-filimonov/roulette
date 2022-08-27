@@ -39,7 +39,7 @@ public class FibonacciStrategy implements BetStrategy<Boolean> {
 
     @Override
     public String getName() {
-        return "Fibonacci strategy";
+        return "Fibonacci";
     }
 
     @Override
