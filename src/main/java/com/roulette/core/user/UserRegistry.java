@@ -12,7 +12,6 @@ import com.roulette.core.bet.outisde.ColumnBet;
 import com.roulette.core.bet.outisde.DozenBet;
 import com.roulette.core.bet.outisde.EvenBet;
 import com.roulette.core.bet.outisde.HalfBet;
-import com.roulette.core.bet.strategy.nowin.BetSupplier;
 import com.roulette.core.bet.strategy.nowin.DoubleBetStrategy;
 import com.roulette.core.bet.strategy.nowin.RandomBetStrategy;
 import com.roulette.core.bet.strategy.nowin.SameBetStrategy;
@@ -89,16 +88,16 @@ public class UserRegistry {
 
     /** Random bet strategy users **/
 
-    public static final User JOANA = new User("Joana", new SuppliedBetStrategy<>(new BetSupplier<>("Random Color", () -> ColorBet.random(MIN_BET))), BALANCE);
-    public static final User HERK = new User("Herk", new SuppliedBetStrategy<>(new BetSupplier<>("Random Even", () -> EvenBet.random(MIN_BET))), BALANCE);
-    public static final User PENNY = new User("Penny", new SuppliedBetStrategy<>(new BetSupplier<>("Random Half", () -> HalfBet.random(MIN_BET))), BALANCE);
-    public static final User DOLLY = new User("Dolly", new SuppliedBetStrategy<>(new BetSupplier<>("Random Dozen", () -> DozenBet.random(MIN_BET))), BALANCE);
-    public static final User STEPHANIE = new User("Stephanie", new SuppliedBetStrategy<>(new BetSupplier<>("Random Column", () -> ColumnBet.random(MIN_BET))), BALANCE);
-    public static final User RANDY = new User("Randy", new SuppliedBetStrategy<>(new BetSupplier<>("Random Split", () -> SplitBet.random(MIN_BET))), BALANCE);
-    public static final User FORREST = new User("Forrest", new SuppliedBetStrategy<>(new BetSupplier<>("Random Field", () -> FieldBet.random(MIN_BET))), BALANCE);
-    public static final User IVAN = new User("Ivan", new SuppliedBetStrategy<>(new BetSupplier<>("Random Street", () -> StreetBet.random(MIN_BET))), BALANCE);
-    public static final User TERRENCE = new User("Terrence", new SuppliedBetStrategy<>(new BetSupplier<>("Random Corner", () -> CornerBet.random(MIN_BET))), BALANCE);
-    public static final User ANTONY = new User("Antony", new SuppliedBetStrategy<>(new BetSupplier<>("Random Line", () -> LineBet.random(MIN_BET))), BALANCE);
+    public static final User JOANA = new User("Joana", new SuppliedBetStrategy<>("Random Color", () -> ColorBet.random(MIN_BET)), BALANCE);
+    public static final User HERK = new User("Herk", new SuppliedBetStrategy<>("Random Even", () -> EvenBet.random(MIN_BET)), BALANCE);
+    public static final User PENNY = new User("Penny", new SuppliedBetStrategy<>("Random Half", () -> HalfBet.random(MIN_BET)), BALANCE);
+    public static final User DOLLY = new User("Dolly", new SuppliedBetStrategy<>("Random Dozen", () -> DozenBet.random(MIN_BET)), BALANCE);
+    public static final User STEPHANIE = new User("Stephanie", new SuppliedBetStrategy<>("Random Column", () -> ColumnBet.random(MIN_BET)), BALANCE);
+    public static final User RANDY = new User("Randy", new SuppliedBetStrategy<>("Random Split", () -> SplitBet.random(MIN_BET)), BALANCE);
+    public static final User FORREST = new User("Forrest", new SuppliedBetStrategy<>("Random Field", () -> FieldBet.random(MIN_BET)), BALANCE);
+    public static final User IVAN = new User("Ivan", new SuppliedBetStrategy<>("Random Street", () -> StreetBet.random(MIN_BET)), BALANCE);
+    public static final User TERRENCE = new User("Terrence", new SuppliedBetStrategy<>("Random Corner", () -> CornerBet.random(MIN_BET)), BALANCE);
+    public static final User ANTONY = new User("Antony", new SuppliedBetStrategy<>("Random Line", () -> LineBet.random(MIN_BET)), BALANCE);
 
     public static final List<User> RANDOM_BET_USERS = List.of(
         JOANA,
