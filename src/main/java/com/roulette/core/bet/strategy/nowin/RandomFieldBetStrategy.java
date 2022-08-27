@@ -3,11 +3,10 @@ package com.roulette.core.bet.strategy.nowin;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.inside.FieldBet;
 import com.roulette.core.field.Field;
-import com.roulette.core.field.FieldRegistry;
 
-public class RandomField extends NoWinBetStrategy<Field> {
+public class RandomFieldBetStrategy extends NoWinBetStrategy<Field> {
 
-    public RandomField(long bet) {
+    public RandomFieldBetStrategy(long bet) {
         super(bet);
     }
 
@@ -17,7 +16,7 @@ public class RandomField extends NoWinBetStrategy<Field> {
     }
 
     @Override
-    public Bet apply() {
-        return new FieldBet(bet, FieldRegistry.random());
+    public Bet<Field> apply() {
+        return FieldBet.random(bet);
     }
 }

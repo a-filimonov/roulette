@@ -12,6 +12,10 @@ public class ColorBet extends Bet<Boolean> {
         super(bet, isRed);
     }
 
+    public static Bet<Boolean> random(long bet) {
+        return new ColorBet(bet, Boolean.random());
+    }
+
     @Override
     protected boolean winCondition(Field field) {
         if (field.isZero()) {

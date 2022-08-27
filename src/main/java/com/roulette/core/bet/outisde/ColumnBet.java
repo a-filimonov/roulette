@@ -11,6 +11,10 @@ public class ColumnBet extends Bet<Field.Column> {
         super(bet, column);
     }
 
+    public static Bet<Field.Column> random(long bet) {
+        return new ColumnBet(bet, Field.Column.random());
+    }
+
     @Override
     protected boolean winCondition(Field field) {
         if (field.isZero()) {

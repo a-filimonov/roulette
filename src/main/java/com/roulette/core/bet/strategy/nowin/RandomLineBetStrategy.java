@@ -3,11 +3,10 @@ package com.roulette.core.bet.strategy.nowin;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.inside.LineBet;
 import com.roulette.core.field.Line;
-import com.roulette.core.field.LineRegistry;
 
-public class RandomLine extends NoWinBetStrategy<Line> {
+public class RandomLineBetStrategy extends NoWinBetStrategy<Line> {
 
-    public RandomLine(long bet) {
+    public RandomLineBetStrategy(long bet) {
         super(bet);
     }
 
@@ -18,6 +17,6 @@ public class RandomLine extends NoWinBetStrategy<Line> {
 
     @Override
     public Bet<Line> apply() {
-        return new LineBet(bet, LineRegistry.random());
+        return LineBet.random(bet);
     }
 }

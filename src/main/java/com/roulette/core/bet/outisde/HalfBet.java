@@ -12,6 +12,10 @@ public class HalfBet extends Bet<Boolean> {
         super(bet, firstHalf);
     }
 
+    public static Bet<Boolean> random(long bet) {
+        return new HalfBet(bet, Boolean.random());
+    }
+
     @Override
     protected boolean winCondition(Field field) {
         if (field.isZero()) {

@@ -12,6 +12,10 @@ public class EvenBet extends Bet<Boolean> {
         super(bet, even);
     }
 
+    public static Bet<Boolean> random(long bet) {
+        return new EvenBet(bet, Boolean.random());
+    }
+
     @Override
     protected boolean winCondition(Field field) {
         if (field.isZero()) {

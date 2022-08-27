@@ -3,11 +3,16 @@ package com.roulette.core.bet.inside;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Split;
+import com.roulette.core.field.SplitRegistry;
 
 public class SplitBet extends Bet<Split> {
 
     public SplitBet(long bet, Split split) {
         super(bet, split);
+    }
+
+    public static Bet<Split> random(long bet) {
+        return new SplitBet(bet, SplitRegistry.random());
     }
 
     @Override

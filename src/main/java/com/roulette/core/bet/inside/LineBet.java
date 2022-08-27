@@ -3,11 +3,16 @@ package com.roulette.core.bet.inside;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Line;
+import com.roulette.core.field.LineRegistry;
 
 public class LineBet extends Bet<Line> {
 
     public LineBet(long bet, Line line) {
         super(bet, line);
+    }
+
+    public static Bet<Line> random(long bet) {
+        return new LineBet(bet, LineRegistry.random());
     }
 
     @Override

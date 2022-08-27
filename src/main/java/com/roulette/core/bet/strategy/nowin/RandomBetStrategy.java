@@ -1,7 +1,8 @@
 package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.BetRegistry;
+import com.roulette.core.bet.registry.BetRegistry;
+import com.roulette.core.bet.registry.RandomBetRegistry;
 import com.roulette.core.bet.Factor;
 
 public class RandomBetStrategy extends NoWinBetStrategy<Factor> {
@@ -10,7 +11,7 @@ public class RandomBetStrategy extends NoWinBetStrategy<Factor> {
 
     public RandomBetStrategy(long bet) {
         super(bet);
-        registry = new BetRegistry(bet);
+        registry = new RandomBetRegistry(bet);
     }
 
     @Override
@@ -20,6 +21,6 @@ public class RandomBetStrategy extends NoWinBetStrategy<Factor> {
 
     @Override
     public Bet apply() {
-        return registry.random();
+        return registry.get();
     }
 }

@@ -1,22 +1,22 @@
 package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
-import com.roulette.core.bet.outisde.EvenBet;
+import com.roulette.core.bet.outisde.ColorBet;
 import com.roulette.util.Boolean;
 
-public class RandomOddEven extends NoWinBetStrategy<Boolean> {
+public class RandomColorBetStrategy extends NoWinBetStrategy<Boolean> {
 
-    public RandomOddEven(long bet) {
+    public RandomColorBetStrategy(long bet) {
         super(bet);
     }
 
     @Override
     public String getName() {
-        return "Random Odd/Even";
+        return "Random Color";
     }
 
     @Override
     public Bet<Boolean> apply() {
-        return new EvenBet(bet, Boolean.random());
+        return ColorBet.random(bet);
     }
 }

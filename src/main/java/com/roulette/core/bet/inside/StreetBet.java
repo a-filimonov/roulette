@@ -3,11 +3,16 @@ package com.roulette.core.bet.inside;
 import com.roulette.core.bet.Bet;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Street;
+import com.roulette.core.field.StreetRegistry;
 
 public class StreetBet extends Bet<Street> {
 
     public StreetBet(long bet, Street street) {
         super(bet, street);
+    }
+
+    public static Bet<Street> random(long bet) {
+        return new StreetBet(bet, StreetRegistry.random());
     }
 
     @Override

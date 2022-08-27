@@ -14,16 +14,16 @@ import com.roulette.core.bet.outisde.EvenBet;
 import com.roulette.core.bet.outisde.HalfBet;
 import com.roulette.core.bet.strategy.nowin.DoubleBetStrategy;
 import com.roulette.core.bet.strategy.nowin.RandomBetStrategy;
-import com.roulette.core.bet.strategy.nowin.RandomColor;
-import com.roulette.core.bet.strategy.nowin.RandomColumn;
-import com.roulette.core.bet.strategy.nowin.RandomCorner;
-import com.roulette.core.bet.strategy.nowin.RandomDozen;
-import com.roulette.core.bet.strategy.nowin.RandomField;
-import com.roulette.core.bet.strategy.nowin.RandomHalf;
-import com.roulette.core.bet.strategy.nowin.RandomLine;
-import com.roulette.core.bet.strategy.nowin.RandomOddEven;
-import com.roulette.core.bet.strategy.nowin.RandomSplit;
-import com.roulette.core.bet.strategy.nowin.RandomStreet;
+import com.roulette.core.bet.strategy.nowin.RandomColorBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomColumnBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomCornerBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomDozenBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomFieldBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomHalfBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomLineBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomEvenBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomSplitBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomStreetBetStrategy;
 import com.roulette.core.bet.strategy.nowin.SameBetStrategy;
 import com.roulette.core.bet.strategy.win.DalembertStrategy;
 import com.roulette.core.bet.strategy.win.FibonacciStrategy;
@@ -95,18 +95,18 @@ public class UserRegistry {
         TERESA
     );
 
-    /** Random bet users **/
+    /** Random bet strategy users **/
 
-    public static final User JOANA = new User("Joana", new RandomColor(MIN_BET), BALANCE);
-    public static final User HERK = new User("Herk", new RandomOddEven(MIN_BET), BALANCE);
-    public static final User PENNY = new User("Penny", new RandomHalf(MIN_BET), BALANCE);
-    public static final User DOLLY = new User("Dolly", new RandomDozen(MIN_BET), BALANCE);
-    public static final User STEPHANIE = new User("Stephanie", new RandomColumn(MIN_BET), BALANCE);
-    public static final User RANDY = new User("Randy", new RandomSplit(MIN_BET), BALANCE);
-    public static final User FORREST = new User("Forrest", new RandomField(MIN_BET), BALANCE);
-    public static final User IVAN = new User("Ivan", new RandomStreet(MIN_BET), BALANCE);
-    public static final User TERRENCE = new User("Terrence", new RandomCorner(MIN_BET), BALANCE);
-    public static final User ANTONY = new User("Antony", new RandomLine(MIN_BET), BALANCE);
+    public static final User JOANA = new User("Joana", new RandomColorBetStrategy(MIN_BET), BALANCE);
+    public static final User HERK = new User("Herk", new RandomEvenBetStrategy(MIN_BET), BALANCE);
+    public static final User PENNY = new User("Penny", new RandomHalfBetStrategy(MIN_BET), BALANCE);
+    public static final User DOLLY = new User("Dolly", new RandomDozenBetStrategy(MIN_BET), BALANCE);
+    public static final User STEPHANIE = new User("Stephanie", new RandomColumnBetStrategy(MIN_BET), BALANCE);
+    public static final User RANDY = new User("Randy", new RandomSplitBetStrategy(MIN_BET), BALANCE);
+    public static final User FORREST = new User("Forrest", new RandomFieldBetStrategy(MIN_BET), BALANCE);
+    public static final User IVAN = new User("Ivan", new RandomStreetBetStrategy(MIN_BET), BALANCE);
+    public static final User TERRENCE = new User("Terrence", new RandomCornerBetStrategy(MIN_BET), BALANCE);
+    public static final User ANTONY = new User("Antony", new RandomLineBetStrategy(MIN_BET), BALANCE);
 
     public static final List<User> RANDOM_BET_USERS = List.of(
         JOANA,
@@ -121,7 +121,7 @@ public class UserRegistry {
         ANTONY
     );
 
-    /** Win strategies bet users **/
+    /** Custom win strategies bet users **/
 
     public static final User NICO = new User("Nico", new DalembertStrategy(DEFAULT_BET), BALANCE);
     public static final User OTTO = new User("Otto", new MartingaleStrategy(DEFAULT_BET), BALANCE);
@@ -141,7 +141,7 @@ public class UserRegistry {
         JAMES
     );
 
-    /** Fully random bet user **/
+    /** Fully random bet user strategy **/
 
     public static final User RONDO = new User("Rondo", new RandomBetStrategy(MIN_BET), BALANCE);
 }

@@ -4,9 +4,9 @@ import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.DozenBet;
 import com.roulette.core.field.Field;
 
-public class RandomDozen extends NoWinBetStrategy<Field.Dozen> {
+public class RandomDozenBetStrategy extends NoWinBetStrategy<Field.Dozen> {
 
-    public RandomDozen(long bet) {
+    public RandomDozenBetStrategy(long bet) {
         super(bet);
     }
 
@@ -17,6 +17,6 @@ public class RandomDozen extends NoWinBetStrategy<Field.Dozen> {
 
     @Override
     public Bet<Field.Dozen> apply() {
-        return new DozenBet(bet, Field.Dozen.random());
+        return DozenBet.random(bet);
     }
 }

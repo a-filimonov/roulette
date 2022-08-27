@@ -4,9 +4,9 @@ import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.outisde.HalfBet;
 import com.roulette.util.Boolean;
 
-public class RandomHalf extends NoWinBetStrategy<Boolean> {
+public class RandomHalfBetStrategy extends NoWinBetStrategy<Boolean> {
 
-    public RandomHalf(long bet) {
+    public RandomHalfBetStrategy(long bet) {
         super(bet);
     }
 
@@ -17,6 +17,6 @@ public class RandomHalf extends NoWinBetStrategy<Boolean> {
 
     @Override
     public Bet<Boolean> apply() {
-        return new HalfBet(bet, Boolean.random());
+        return HalfBet.random(bet);
     }
 }

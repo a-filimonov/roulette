@@ -2,12 +2,17 @@ package com.roulette.core.bet.inside;
 
 import com.roulette.core.bet.Bet;
 import com.roulette.core.field.Corner;
+import com.roulette.core.field.CornerRegistry;
 import com.roulette.core.field.Field;
 
 public class CornerBet extends Bet<Corner> {
 
     public CornerBet(long bet, Corner corner) {
         super(bet, corner);
+    }
+
+    public static Bet<Corner> random(long bet) {
+        return new CornerBet(bet, CornerRegistry.random());
     }
 
     @Override

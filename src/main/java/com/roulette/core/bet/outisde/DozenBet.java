@@ -11,6 +11,10 @@ public class DozenBet extends Bet<Field.Dozen> {
         super(bet, dozen);
     }
 
+    public static Bet<Field.Dozen> random(long bet) {
+        return new DozenBet(bet, Field.Dozen.random());
+    }
+
     @Override
     protected boolean winCondition(Field field) {
         if (field.isZero()) {
