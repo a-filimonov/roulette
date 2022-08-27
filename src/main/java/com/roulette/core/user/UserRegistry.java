@@ -13,6 +13,7 @@ import com.roulette.core.bet.outisde.DozenBet;
 import com.roulette.core.bet.outisde.EvenBet;
 import com.roulette.core.bet.outisde.HalfBet;
 import com.roulette.core.bet.strategy.nowin.DoubleBetStrategy;
+import com.roulette.core.bet.strategy.nowin.RandomBetStrategy;
 import com.roulette.core.bet.strategy.nowin.RandomColor;
 import com.roulette.core.bet.strategy.nowin.RandomColumn;
 import com.roulette.core.bet.strategy.nowin.RandomCorner;
@@ -27,7 +28,7 @@ import com.roulette.core.bet.strategy.nowin.SameBetStrategy;
 import com.roulette.core.bet.strategy.win.DalembertStrategy;
 import com.roulette.core.bet.strategy.win.FibonacciStrategy;
 import com.roulette.core.bet.strategy.win.GrandMartingaleStrategy;
-import com.roulette.core.bet.strategy.win.JamesBondStrategy;
+import com.roulette.core.bet.strategy.nowin.JamesBondStrategy;
 import com.roulette.core.bet.strategy.win.MartingaleStrategy;
 import com.roulette.core.bet.strategy.win.ReverseMartingaleStrategy;
 import com.roulette.core.field.Field;
@@ -139,4 +140,8 @@ public class UserRegistry {
         URSULA,
         JAMES
     );
+
+    /** Fully random bet user **/
+
+    public static final User RONDO = new User("Rondo", new RandomBetStrategy(MIN_BET), BALANCE);
 }

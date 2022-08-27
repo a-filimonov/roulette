@@ -1,11 +1,10 @@
-package com.roulette.core.bet.strategy.win;
+package com.roulette.core.bet.strategy.nowin;
 
 import com.roulette.core.bet.Bet;
 import com.roulette.core.bet.Factor;
 import com.roulette.core.bet.inside.LineBet;
 import com.roulette.core.bet.inside.FieldBet;
 import com.roulette.core.bet.outisde.HalfBet;
-import com.roulette.core.bet.strategy.nowin.NoWinBetStrategy;
 import com.roulette.core.field.Field;
 import com.roulette.core.field.Line;
 import com.roulette.util.Boolean;
