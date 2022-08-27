@@ -10,16 +10,16 @@ import com.roulette.util.Boolean;
  */
 public class DalembertStrategy implements BetStrategy<Boolean> {
 
-    private Bet<Boolean> currentBet;
+    private Bet<Boolean> userBet;
 
     public DalembertStrategy(Bet<Boolean> bet) {
-        this.currentBet = bet;
+        this.userBet = bet;
     }
 
     @Override
     public Bet<Boolean> apply(Long win) {
-        this.currentBet = win == 0 ? this.currentBet.add(1) : this.currentBet.add(-1);
-        return this.currentBet;
+        this.userBet = win == 0 ? this.userBet.add(1) : this.userBet.add(-1);
+        return this.userBet;
     }
 
     @Override

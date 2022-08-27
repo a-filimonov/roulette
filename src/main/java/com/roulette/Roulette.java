@@ -3,7 +3,6 @@ package com.roulette;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.function.Function;
 
 import com.roulette.core.RouletteWheel;
@@ -12,21 +11,17 @@ import com.roulette.core.field.Field;
 import com.roulette.core.user.User;
 import com.roulette.log.Log;
 import com.roulette.stats.UserStats;
-import lombok.Getter;
 
 import static java.util.stream.Collectors.toMap;
 
 public class Roulette {
 
-    @Getter
-    private final String id;
     private final List<User> users;
     private final Map<User, UserStats> userStats;
     private final Log log;
     private final RouletteWheel wheel;
 
     public Roulette(List<User> users, Log log) {
-        this.id = UUID.randomUUID().toString();
         this.users = users;
         this.log = log;
         this.wheel = new RouletteWheel();
