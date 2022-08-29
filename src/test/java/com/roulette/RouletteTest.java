@@ -17,20 +17,20 @@ import static com.roulette.core.user.UserRegistry.SAME_BET_USERS;
 import static com.roulette.core.user.UserRegistry.WIN_STRATEGY_USERS;
 import static java.util.stream.Collectors.toMap;
 import static org.junit.jupiter.api.Named.named;
-import static org.junit.jupiter.params.provider.Arguments.*;
+import static org.junit.jupiter.params.provider.Arguments.of;
 
 class RouletteTest {
 
-    private static final boolean DEBUG = false;
+    private static final Log LOG = new Log(false);
 
     @ParameterizedTest
     @MethodSource
     void shouldPlayRouletteForUserList(List<User> users) {
-        Roulette roulette = new Roulette(users, new Log(DEBUG));
+        Roulette roulette = new Roulette(users, LOG);
         Long initialCasinoBalance = roulette.getBalance();
         print(roulette.play());
-        System.out.printf("Casino profit after game: %s%n", roulette.getBalance() - initialCasinoBalance);
-        System.out.printf("User balances after game: %s%n", users.stream().collect(toMap(User::getName, User::getBalance)));
+        LOG.infoln("Casino profit after game: %s", roulette.getBalance() - initialCasinoBalance);
+        LOG.infoln("User balances after game: %s\n", users.stream().collect(toMap(User::getName, User::getBalance)));
     }
 
     private static Stream<Arguments> shouldPlayRouletteForUserList() {
@@ -45,7 +45,7 @@ class RouletteTest {
     private static void print(Collection<UserStats> stats) {
         stats.forEach(stat -> {
             User user = stat.getUser();
-            System.out.printf("%s played [%s] strategy: %s\n", user.getName(), user.getStrategy().getName(), stat);
+            LOG.infoln("%s played [%s] strategy: %s", user.getName(), user.getStrategy().getName(), stat);
         });
     }
 }

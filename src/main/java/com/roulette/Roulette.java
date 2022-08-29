@@ -24,6 +24,7 @@ public class Roulette {
 
     @Getter
     private Long balance;
+    private int turns;
 
     public Roulette(List<User> users, Log log) {
         this.users = users;
@@ -31,6 +32,8 @@ public class Roulette {
         this.wheel = new RouletteWheel();
         this.userStats = users.stream().collect(toMap(Function.identity(), UserStats::new));
         this.balance = users.stream().mapToLong(User::getBalance).sum() * 10;
+        log.infoln("Roulette initialized");
+        log.infoln("Users: %s", users);
     }
 
     public Collection<UserStats> play() {
@@ -42,16 +45,21 @@ public class Roulette {
     }
 
     private void play(List<User> users) {
+        // Users make their bets
         var userBets = users.stream()
             .collect(toMap(Function.identity(), user -> user.getStrategy().apply(user.getLastWin())));
 
+        // Roulette turns
         Field field = wheel.turn();
+        turns++;
+
         if (users.size() > 1) {
-            log.debugln("Turn :: [%s]", field);
+            log.debugln("Turn %s :: [%s]", turns, field);
         } else {
-            log.debug("Turn :: [%s]", field);
+            log.debug("Turn %s :: [%s]", turns, field);
         }
 
+        // Casino calculates wins
         userBets.forEach((key, value) -> processWin(key, value, field));
     }
 

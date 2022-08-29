@@ -7,15 +7,23 @@ public class Log {
 
     private final boolean debug;
 
+    public void info(String str, Object... args) {
+        System.out.printf(str, args);
+    }
+
+    public void infoln(String str, Object... args) {
+        System.out.printf((str) + "%n", args);
+    }
+
     public void debug(String str, Object... args) {
         if (debug) {
-            System.out.printf(str, args);
+            info(str, args);
         }
     }
 
     public void debugln(String str, Object... args) {
         if (debug) {
-            System.out.printf((str) + "%n", args);
+            infoln(str, args);
         }
     }
 }
