@@ -1,6 +1,6 @@
 package com.roulette.core.field;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import com.roulette.core.bet.Factor;
@@ -22,7 +22,7 @@ public class Field implements Factor {
         private static final Random RANDOM = new Random();
 
         public static Dozen random() {
-            return Arrays.asList(values()).get(RANDOM.nextInt(values().length));
+            return List.of(values()).get(RANDOM.nextInt(values().length));
         }
     }
 
@@ -32,7 +32,7 @@ public class Field implements Factor {
         private static final Random RANDOM = new Random();
 
         public static Column random() {
-            return Arrays.asList(values()).get(RANDOM.nextInt(values().length));
+            return List.of(values()).get(RANDOM.nextInt(values().length));
         }
     }
 
