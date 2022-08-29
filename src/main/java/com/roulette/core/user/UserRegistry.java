@@ -13,13 +13,13 @@ import com.roulette.core.bet.outisde.DozenBet;
 import com.roulette.core.bet.outisde.EvenBet;
 import com.roulette.core.bet.outisde.HalfBet;
 import com.roulette.core.bet.strategy.nowin.DoubleBetStrategy;
+import com.roulette.core.bet.strategy.nowin.JamesBondStrategy;
 import com.roulette.core.bet.strategy.nowin.RandomBetStrategy;
 import com.roulette.core.bet.strategy.nowin.SameBetStrategy;
 import com.roulette.core.bet.strategy.nowin.SuppliedBetStrategy;
 import com.roulette.core.bet.strategy.win.DalembertStrategy;
 import com.roulette.core.bet.strategy.win.FibonacciStrategy;
 import com.roulette.core.bet.strategy.win.GrandMartingaleStrategy;
-import com.roulette.core.bet.strategy.nowin.JamesBondStrategy;
 import com.roulette.core.bet.strategy.win.MartingaleStrategy;
 import com.roulette.core.bet.strategy.win.ReverseMartingaleStrategy;
 import com.roulette.core.field.Field;
@@ -35,6 +35,7 @@ import static com.roulette.core.field.StreetRegistry.S_13_14_15;
 public class UserRegistry {
 
     private static final int MIN_BET = 10;
+    private static final int MID_BET = 100;
     private static final ColorBet DEFAULT_BET = new ColorBet(MIN_BET, Boolean.TRUE);
     private static final Long BALANCE = 10000L;
 
@@ -86,7 +87,7 @@ public class UserRegistry {
         TERESA
     );
 
-    /** Random bet strategy users **/
+    /** Random bet factor strategy users **/
 
     public static final User JOANA = new User("Joana", new SuppliedBetStrategy<>("Random Color", () -> ColorBet.random(MIN_BET)), BALANCE);
     public static final User HERK = new User("Herk", new SuppliedBetStrategy<>("Random Even", () -> EvenBet.random(MIN_BET)), BALANCE);
@@ -99,7 +100,7 @@ public class UserRegistry {
     public static final User TERRENCE = new User("Terrence", new SuppliedBetStrategy<>("Random Corner", () -> CornerBet.random(MIN_BET)), BALANCE);
     public static final User ANTONY = new User("Antony", new SuppliedBetStrategy<>("Random Line", () -> LineBet.random(MIN_BET)), BALANCE);
 
-    public static final List<User> RANDOM_BET_USERS = List.of(
+    public static final List<User> RANDOM_BET_FACTOR_USERS = List.of(
         JOANA,
         HERK,
         PENNY,
@@ -135,4 +136,10 @@ public class UserRegistry {
     /** Fully random bet user strategy **/
 
     public static final User RONDO = new User("Rondo", new RandomBetStrategy(MIN_BET), BALANCE);
+    public static final User ALEXA = new User("Alexa", new RandomBetStrategy(MID_BET), BALANCE);
+
+    public static final List<User> RANDOM_BETS_USERS = List.of(
+        RONDO,
+        ALEXA
+    );
 }

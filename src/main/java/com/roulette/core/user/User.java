@@ -13,6 +13,8 @@ public class User {
     private long balance;
     @Setter
     private long lastWin;
+    @Setter
+    private boolean bankrupt;
 
     public User(String name, BetStrategy<?> strategy, long balance) {
         this.name = name;
@@ -34,9 +36,12 @@ public class User {
         return balance;
     }
 
+    public boolean canBet(long betAmount) {
+        return balance >= betAmount;
+    }
+
     @Override
     public String toString() {
         return String.format("%s (%s)", name, balance);
     }
-
 }
