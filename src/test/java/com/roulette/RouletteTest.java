@@ -43,7 +43,7 @@ class RouletteTest {
     }
 
     private static void print(Collection<UserStats> stats) {
-        stats.forEach(stat -> {
+        stats.stream().sorted((s1, s2) -> (int) (s2.profit() - s1.profit())).forEach(stat -> {
             User user = stat.getUser();
             LOG.infoln("%s played [%s] strategy: %s", user.getName(), user.getStrategy().getName(), stat);
         });

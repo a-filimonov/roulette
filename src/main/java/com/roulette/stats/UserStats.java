@@ -48,7 +48,7 @@ public class UserStats implements Comparable<UserStats> {
         return totalWin * 100d / totalBet;
     }
 
-    private long profit() {
+    public long profit() {
         return maxBalance - initBalance;
     }
 
