@@ -13,6 +13,7 @@ import com.roulette.log.Log;
 import com.roulette.stats.UserStats;
 import lombok.Getter;
 
+import static java.util.function.Predicate.not;
 import static java.util.stream.Collectors.toMap;
 
 public class Roulette {
@@ -47,6 +48,7 @@ public class Roulette {
     private void play(List<User> users) {
         // Users make their bets
         var userBets = users.stream()
+            .filter(not(User::isBankrupt))
             .collect(toMap(Function.identity(), user -> user.getStrategy().apply(user.getLastWin())));
 
         // Roulette turns

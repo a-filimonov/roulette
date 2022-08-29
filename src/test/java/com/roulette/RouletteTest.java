@@ -35,7 +35,7 @@ class RouletteTest {
 
     private static Stream<Arguments> shouldPlayRouletteForUserList() {
         return Stream.of(
-            of(named("Users play different win strategies", WIN_STRATEGY_USERS)),   //TODO fix balance
+            of(named("Users play different win strategies", WIN_STRATEGY_USERS)),
             of(named("Users always bet the same", SAME_BET_USERS)),
             of(named("Users bet random factors", RANDOM_BET_FACTOR_USERS)),
             of(named("Users bet totally random", RANDOM_BETS_USERS))
